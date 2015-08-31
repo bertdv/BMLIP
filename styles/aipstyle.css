@@ -127,6 +127,15 @@ div.text_cell_render{
   border: 1px solid blue ;
 }
 
+h4#CODE-EXAMPLE,
+h4#END-OF-CODE-EXAMPLE {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #d0f9ca !important;
+    border-top: #849f81 1px solid;
+    border-bottom: #849f81 1px solid;
+}
+
 </style>
 <script>
     MathJax.Hub.Config({
