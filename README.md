@@ -1,4 +1,9 @@
-## Lecture Notes 5SSB0 (Adaptive Information Processing)
+## Course Notes for Adaptive Information Processing (5SSB0)
+
+**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox**      
+Eindhoven University of Technology, Dept. of Electrical Engineering     
+Corr. to <bert.de.vries@tue.nl>
+
 
 To open the lecture notes in [IJulia](https://github.com/JuliaLang/IJulia.jl), download the .ipynb files to your computer and start a [Jupyter](https://jupyter.org/) notebook by
 
