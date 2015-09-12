@@ -1,4 +1,4 @@
-## Course Notes for Adaptive Information Processing (5SSB0)
+## Adaptive Information Processing (course 5SSB0 at [TU/e](http://tue.nl)) 
 
 **Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox**      
 Eindhoven University of Technology, Dept. of Electrical Engineering     
@@ -31,3 +31,8 @@ You can view the lecture notes through the links below:
 - [11- Continuous Latent Variable Models - PCA, FA and ICA](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/11_continuous_latent_variable_models/Continuous-Latent-Variable-Models-PCA-FA-and-ICA.ipynb)     
 - [12- Factor Graphs and Message Passing Algorithms](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/12_factor_graphs/Factor-Graphs-and-Message-Passing-Algorithms.ipynb)     
 - [13- EM as a Message Passing Algorithm](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/13_EM_as_message_passing/EM-as-Message-Passing.ipynb)
+- 
+
+#### License 
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Adaptive Information Processing (5SSB0)</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Bert de Vries, Tjalling Tjalkens and Marco Cox</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/bertdv/AIP-5SSB0" rel="dct:source">https://github.com/bertdv/AIP-5SSB0</a>.
