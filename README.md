@@ -35,7 +35,7 @@ You can view the lecture notes through the links below:
 - [8 - Discriminative Classification](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/08_discriminative_classification/Discriminative-Classification.ipynb)
 - [9 - Clustering with Gaussian Mixture Models](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/09_clustering_with_Gaussian_mixture_models/Clustering-with-Gaussian-Mixture-Models.ipynb)
 - [10- The EM Algorithm](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/10_the_EM_algorithm/The-General-EM-Algorithm.ipynb)
-- [11- Continuous Latent Variable Models - PCA, FA and ICA](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/11_continuous_latent_variable_models/Continuous-Latent-Variable-Models-PCA-FA-and-ICA.ipynb)
+- [11- Continuous Latent Variable Models - PCA and FA](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/11_continuous_latent_variable_models/Continuous-Latent-Variable-Models-PCA-and-FA.ipynb)
 - [12- Factor Graphs and Message Passing Algorithms](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/12_factor_graphs/Factor-Graphs-and-Message-Passing-Algorithms.ipynb)
 - [13- EM as a Message Passing Algorithm](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/13_EM_as_message_passing/EM-as-Message-Passing.ipynb)
 
