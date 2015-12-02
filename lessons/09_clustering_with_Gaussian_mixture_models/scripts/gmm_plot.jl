@@ -1,6 +1,6 @@
-using DataFrames, Distributions, PyPlot
+using Distributions, PyPlot
 
-function plotGMM(X::Matrix, clusters::Vector{MvNormal}, γ::Matrix)
+function plotGMM(X::Matrix, clusters::Vector, γ::Matrix)
     # Plot data set and (fitted) mixture model consisting of two Gaussian distributions
     # X contains a 2-d data set (every column holds a data point)
     # clusters holds the 2 Gaussian elements of the mixture model
@@ -31,15 +31,8 @@ function plotGMM(X::Matrix, clusters::Vector{MvNormal}, γ::Matrix)
     end
 
     # Figure make-up
-    xlabel(L"x_1"); ylabel(L"x_2")
     plotlimits = hcat(minimum(X,2), maximum(X,2))
     margin = 0.2*abs(plotlimits[:,1] - plotlimits[:,2])
     xlim([plotlimits[1,1]-margin[1]; plotlimits[1,2]+margin[1]])
     ylim([plotlimits[2,1]-margin[2]; plotlimits[2,2]+margin[2]])
-end
-
-function loadOldFaithfulDataset()
-    # Load 'old faithful' data set
-    old_faithful = readtable("../../files/datasets/old_faithful.csv")
-    return convert(Matrix{Float64}, vcat(old_faithful[1]', old_faithful[2]')) # Every column is a data point
 end
