@@ -4,7 +4,8 @@
 Eindhoven University of Technology, Dept. of Electrical Engineering                 
 Corr. to <bert.de.vries@tue.nl>                
 
-This site contains materials for course 5SSB0 (Adaptive Information Processing) at [TU/e](http://tue.nl).           
+This site contains materials for course [5SSB0 (Adaptive Information Processing)](http://bertdv.github.io/teaching/AIP-5SSB0/) at [TU/e](http://tue.nl). 
+
 
 To open the lecture notes in [IJulia](https://github.com/JuliaLang/IJulia.jl), download the .ipynb files to your computer and start a [Jupyter](https://jupyter.org/) notebook by
 
@@ -20,7 +21,7 @@ To run the interactive code examples in the lecture nodes, the following Julia p
 map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot"])
 ```
 
-## Read-only versions
+### Read-only versions
 
 You can view the lecture notes through the links below:
 
