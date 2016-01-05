@@ -1,0 +1,36 @@
+/* The #notebook selector is there to make sure the styles override the
+ * defaults through the cascade by being more specific */
+
+/* Undo the hiding of the final two notebook cells by the 'online' styles */
+#notebook div.cell:nth-last-child(-n+2) {
+  display: block;
+}
+
+#notebook div.cell {
+  width: 100%;
+}
+
+#notebook div.output_stderr {
+  display: none;
+}
+
+#notebook div.prompt.input_prompt {
+  display: none;
+}
+
+#notebook div.text_cell_render {
+  width: 85%;
+}
+
+#notebook div.text_cell_render h1 {
+  margin-bottom: 0;
+}
+
+#notebook div.text_cell_render h4 {
+  margin: 2ex 0;
+}
+
+#notebook div.text_cell.rendered .rendered_html {
+  overflow: hidden;
+}
+
