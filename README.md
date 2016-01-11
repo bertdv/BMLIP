@@ -1,25 +1,11 @@
-## Adaptive Information Processing                 
+## Adaptive Information Processing
 
-**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox**          
-Eindhoven University of Technology, Dept. of Electrical Engineering                 
-Corr. to <bert.de.vries@tue.nl>                
+**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox**
+Eindhoven University of Technology, Dept. of Electrical Engineering
+Corr. to <bert.de.vries@tue.nl>
 
-This site contains materials for course [5SSB0 (Adaptive Information Processing)](http://bertdv.github.io/teaching/AIP-5SSB0/) at [TU/e](http://tue.nl). 
+This site contains materials for course [5SSB0 (Adaptive Information Processing)](http://bertdv.github.io/teaching/AIP-5SSB0/) at [TU/e](http://tue.nl).
 
-
-To open the lecture notes in [IJulia](https://github.com/JuliaLang/IJulia.jl), download the .ipynb files to your computer and start a [Jupyter](https://jupyter.org/) notebook by
-
-```
-$ jupyter notebook
-```
-
-You will now get a new page in your browser with a list of available notebooks. Alternatively, if you don't have Julia/Jupyter installed on your system, you can use [JuliaBox](https://www.juliabox.org/) to run the notebooks.
-
-To run the interactive code examples in the lecture nodes, the following Julia packages are required: `Cubature`, `DataFrames`, `Distributions`, `Interact`, `PyPlot`. To install the required packages, execute:
-
-```jl
-map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot"])
-```
 
 ### Read-only versions
 
@@ -40,6 +26,59 @@ You can view the lecture notes through the links below:
 - [12- Factor Graphs and Message Passing Algorithms](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/12_factor_graphs/Factor-Graphs-and-Message-Passing-Algorithms.ipynb)
 - [13- Dynamic Latent Variable Models](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/13_dynamic_latent_variable_models/Dynamic-Latent-Variable-Models.ipynb)
 - [14- EM as a Message Passing Algorithm](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/14_EM_as_message_passing/EM-as-Message-Passing.ipynb)
+
+
+### Opening the lecture notes locally
+
+To open the lecture notes in [IJulia](https://github.com/JuliaLang/IJulia.jl), download the .ipynb files to your computer and start a [Jupyter](https://jupyter.org/) notebook by
+
+```
+$ jupyter notebook
+```
+
+You will now get a new page in your browser with a list of available notebooks. Alternatively, if you don't have Julia/Jupyter installed on your system, you can use [JuliaBox](https://www.juliabox.org/) to run the notebooks (see exact instructions below).
+
+To run the interactive code examples in the lecture nodes, the following Julia packages are required: `Cubature`, `DataFrames`, `Distributions`, `Interact`, `PyPlot`. To install the required packages, execute:
+
+```jl
+map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot"])
+```
+
+### Running the lecture notes on JuliaBox.org
+
+Follow these instructions to run the code examples from the lecture notes online through [JuliaBox](https://www.juliabox.org/).
+
+1. **(Create account)**
+   Go to https://www.juliabox.org/, create an account and log in.
+2. **(Necessary JuliaBox hack)**
+   Click the 'IJulia tab', and then create a new text file using `New -> Text File`.
+   Paste the following content in the new file:
+
+   ```
+   VERSION >= v"0.4" && splice!(Base.LOAD_CACHE_PATH, 3)
+   ```
+
+   Then, press `ctrl+s` to save the file and close the browser tab. Back in the IJulia file explorer, click the checkbox in front of `untitled.txt`, click `Rename`, and rename the file to `.juliarc.jl`.
+
+3. **(Install required packages)**
+   Go to the `Console` tab, and then start a Julia v0.4.2 shell by typing
+
+   ```
+   /opt/julia-0.4.2/bin/julia
+   ```
+
+   In the Julia shell, execute the following command to install all required packages:
+
+   ```jl
+   map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot"])
+   ```
+
+   Afterwards, type `exit()` to quit Julia.
+
+4. **(Import lecture notes into JuliaBox)**
+   Go to the `Sync` tab, and add the lecture notes git repository by pasting `git@github.com:bertdv/AIP-5SSB0.git` in the `Git Clone URL` field, and then pressing the plus-sign.
+
+You can now open the lecture notes by going to the `IJulia` tab (press the refresh button if the folder `AIP-5SSB0` does not show up). Navigate to a specific lesson and click the `.ipynb` file to open the notebook.
 
 
 #### License
