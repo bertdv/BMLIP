@@ -4,6 +4,11 @@
 using DataFrames
 include("gmm_plot.jl")
 
+function continueOrExit()
+    # Helper function: wait for keypress, quit on q
+    if (readline()[1] == 'q') exit() end
+end
+
 old_faithful = readtable("../../files/datasets/old_faithful.csv")
 X = convert(Matrix{Float64}, [old_faithful[1] old_faithful[2]]') # Every column is a data point
 N = size(X, 2)
@@ -17,7 +22,7 @@ clusters = [MvNormal([4.;60.], diagm([.5;10^2]));
 
 ion()
 plotGMM(X, clusters, γ)
-print("Press [enter] for E-step or ctrl+c to quit"); readline()
+print("Press [enter] for E-step or [q] to quit: "); continueOrExit()
 
 while(true)
     # E-step: update γ
@@ -25,7 +30,7 @@ while(true)
     γ[1,:] = (π_hat[1] * pdf(clusters[1],X) ./ norm)'
     γ[2,:] = 1 - γ[1,:]
     clf(); plotGMM(X, clusters, γ)
-    print("Press [enter] for M-step or ctrl+c to quit"); readline()
+    print("Press [enter] for M-step or [q] to quit: "); continueOrExit()
 
     # M-step: update cluster parameters and π_hat
     m = sum(γ, 2)
@@ -37,5 +42,5 @@ while(true)
         clusters[k] = MvNormal(μ_k, Σ_k)
     end
     clf(); plotGMM(X, clusters, γ)
-    print("Press [enter] for E-step or ctrl+c to quit"); readline()
+    print("Press [enter] for E-step or [q] to quit: "); continueOrExit()
 end
