@@ -93,7 +93,7 @@ def concat_and_clean():
 
         # The javascript delay is necessary for MathJax to render all equations
         # in the document
-        os.system('wkhtmltopdf --javascript-delay 10000 --title AIP-5SSB0 cover ./cover.html {0} AIP-5SSB0.pdf'.format(bundle_filename))
+        os.system('wkhtmltopdf --footer-right "[page]/[toPage]" --javascript-delay 10000 --title AIP-5SSB0 cover ./cover.html toc {0} AIP-5SSB0.pdf'.format(bundle_filename))
 
     shutil.rmtree(build_directory)
 
