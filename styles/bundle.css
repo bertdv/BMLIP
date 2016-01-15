@@ -1,36 +1,51 @@
 /* The #notebook selector is there to make sure the styles override the
  * defaults through the cascade by being more specific */
 
-/* Undo the hiding of the final two notebook cells by the 'online' styles */
-#notebook div.cell:nth-last-child(-n+2) {
-  display: block;
-}
+@media print {
+  body {
+    /* Positioning MUST be relative on any parents of the sections
+     * for the page-break directives to have any effect! */
+    position: relative !important;
+  }
 
-#notebook div.cell {
-  width: 100%;
-}
+  /* The final section is excluded to prevent a final empty page
+   * from showing up */
+  section:not(:last-child) {
+    page-break-after: always;
+  }
 
-#notebook div.output_stderr {
-  display: none;
-}
+  #notebook div.cell {
+    width: 100%;
+  }
 
-#notebook div.prompt.input_prompt {
-  display: none;
-}
+  #notebook div.output_stderr {
+    display: none;
+  }
 
-#notebook div.text_cell_render {
-  width: 85%;
-}
+  #notebook div.prompt.input_prompt {
+    display: none;
+  }
 
-#notebook div.text_cell_render h1 {
-  margin-bottom: 0;
-}
+  #notebook div.text_cell_render {
+    font-size: 11pt;
+    width: 100%;
+  }
 
-#notebook div.text_cell_render h4 {
-  margin: 2ex 0;
-}
+  #notebook div.text_cell_render h1 {
+    font-size: 33pt;
+    margin: 0;
+  }
 
-#notebook div.text_cell.rendered .rendered_html {
-  overflow: hidden;
-}
+  #notebook div.text_cell_render h3 {
+    font-size: 16pt;
+  }
 
+  #notebook div.text_cell_render h4 {
+    font-size: 12pt;
+    margin: 2ex 0;
+  }
+
+  #notebook div.text_cell.rendered .rendered_html {
+    overflow: hidden;
+  }
+}

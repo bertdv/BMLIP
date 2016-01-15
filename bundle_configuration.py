@@ -79,9 +79,10 @@ def concat_and_clean():
             # The final two cells of every rendered notebook are expected to
             # contain the code loading custom CSS, these are not necessary for
             # the bundled version and should therefore be removed
-            cells = cells[0:-2]
-            for cell in cells:
-                notebook_root.append(cell)
+            chapter_node = html.fromstring('<section></section>')
+            notebook_root.append(chapter_node)
+            for cell in cells[0:-2]:
+                chapter_node.append(cell)
 
     shutil.copy('./styles/bundle.css', str(Path(build_directory, 'custom.css')))
 
@@ -93,7 +94,15 @@ def concat_and_clean():
 
         # The javascript delay is necessary for MathJax to render all equations
         # in the document
-        os.system('wkhtmltopdf --enable-toc-back-links --footer-right "[page]/[toPage]" --javascript-delay 10000 --title AIP-5SSB0 cover ./cover.html toc {0} AIP-5SSB0.pdf'.format(bundle_filename))
+        os.system("""wkhtmltopdf --enable-toc-back-links \
+                                 --footer-right "[page]/[toPage]" \
+                                 --javascript-delay 10000 \
+                                 --print-media-type \
+                                 --title AIP-5SSB0 \
+                                 cover ./cover.html \
+                                 toc \
+                                 {0} \
+                                 AIP-5SSB0.pdf""".format(bundle_filename))
 
     shutil.rmtree(build_directory)
 
