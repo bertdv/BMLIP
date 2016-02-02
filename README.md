@@ -76,7 +76,10 @@ Follow these instructions to run the code examples from the lecture notes online
    Afterwards, type `exit()` to quit Julia.
 
 4. **(Import lecture notes into JuliaBox)**
-   Go to the `Sync` tab, and add the lecture notes git repository by pasting `git@github.com:bertdv/AIP-5SSB0.git` in the `Git Clone URL` field, and then pressing the plus-sign.
+   Go to the `Sync` tab, and add the lecture notes git repository through the following actions: 
+ 1. Paste `https://github.com/bertdv/AIP-5SSB0.git` in the `Git Clone URL` field
+ 2. Click with the mouse in the `branch` field. You should get `master` in the `branch` field and `AIP-5SSB0` in the `juliabox` field.
+ 3. Press the plus-sign.
 
 You can now open the lecture notes by going to the `IJulia` tab (press the refresh button if the folder `AIP-5SSB0` does not show up). Navigate to a specific lesson and click the `.ipynb` file to open the notebook.
 
