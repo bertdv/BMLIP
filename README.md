@@ -61,10 +61,10 @@ Follow these instructions to run the code examples from the lecture notes online
    Then, press `ctrl+s` to save the file and close the browser tab. Back in the IJulia file explorer, click the checkbox in front of `untitled.txt`, click `Rename`, and rename the file to `.juliarc.jl`.
 
 3. **(Install required packages)**
-   Go to the `Console` tab, and then start a Julia v0.4.2 shell by typing
+   Go to the `Console` tab, and then start a Julia v0.4.3 shell by typing
 
    ```
-   /opt/julia-0.4.2/bin/julia
+   /opt/julia-0.4.3/bin/julia
    ```
 
    In the Julia shell, execute the following command to install all required packages:
