@@ -61,10 +61,10 @@ Follow these instructions to run the code examples from the lecture notes online
    Then, press `ctrl+s` to save the file and close the browser tab. Back in the IJulia file explorer, click the checkbox in front of `untitled.txt`, click `Rename`, and rename the file to `.juliarc.jl`.
 
 3. **(Install required packages)**
-   Go to the `Console` tab, and then start a Julia v0.4.2 shell by typing
+   Go to the `Console` tab, and then start a Julia v0.4.3 shell by typing
 
    ```
-   /opt/julia-0.4.2/bin/julia
+   /opt/julia-0.4.3/bin/julia
    ```
 
    In the Julia shell, execute the following command to install all required packages:
@@ -76,7 +76,10 @@ Follow these instructions to run the code examples from the lecture notes online
    Afterwards, type `exit()` to quit Julia.
 
 4. **(Import lecture notes into JuliaBox)**
-   Go to the `Sync` tab, and add the lecture notes git repository by pasting `git@github.com:bertdv/AIP-5SSB0.git` in the `Git Clone URL` field, and then pressing the plus-sign.
+   Go to the `Sync` tab, and add the lecture notes git repository through the following actions: 
+ 1. Paste `https://github.com/bertdv/AIP-5SSB0.git` in the `Git Clone URL` field
+ 2. Click with the mouse in the `branch` field. You should get `master` in the `branch` field and `AIP-5SSB0` in the `juliabox` field.
+ 3. Press the plus-sign.
 
 You can now open the lecture notes by going to the `IJulia` tab (press the refresh button if the folder `AIP-5SSB0` does not show up). Navigate to a specific lesson and click the `.ipynb` file to open the notebook.
 
