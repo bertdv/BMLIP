@@ -46,7 +46,7 @@ def concat_and_clean():
         bundle_path = Path(build_directory, source_path.stem + '.html')
 
         if bundle_path.exists():
-            rendered_file = open(str(bundle_path), 'r')
+            rendered_file = open(str(bundle_path), 'r', encoding='utf-8')
             html_source = html.fromstring(rendered_file.read())
             rendered_file.close()
 
@@ -88,7 +88,7 @@ def concat_and_clean():
 
     if bundle_document != None:
         bundle_filename = str(Path(build_directory, 'bundle.html'))
-        bundle_file = open(bundle_filename, 'w')
+        bundle_file = open(bundle_filename, 'w', encoding='utf-8')
         bundle_file.write(html.tostring(bundle_document).decode('utf-8'))
         bundle_file.close()
 
