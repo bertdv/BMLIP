@@ -48,4 +48,8 @@
   #notebook div.text_cell.rendered .rendered_html {
     overflow: hidden;
   }
+
+  #notebook .highlight .err {
+    border: none;
+  }
 }
