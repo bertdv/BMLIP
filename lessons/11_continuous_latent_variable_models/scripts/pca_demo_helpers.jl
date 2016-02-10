@@ -13,91 +13,102 @@ function readDataSet(filename)
 end
 
 type pPCAParams
-    W::Matrix
-    μ::Vector
-    σ2::Float64
+    W::Matrix{Float64}
+    m::Vector{Float64}
+    v::Float64
 end
 
 function pPCA(X::Matrix, M::Int64)
-    # Implement probabilistic PCA using the EM algorithm]𝜓
+    # Implement probabilistic PCA using the EM algorithm
     # X collects the data points on its columns
     # X may contain missing values, indicated by NaN
-    N = size(X, 2); D = size(X, 1)
 
-    # Shift X to be zero-mean, ignoring missing values
-    # Missing values are treated as latent variables,
-    # so we keep track of E[x-μ] and E[(x-μ)' * (x-μ)].
-    # In case there are no missing values, both expectations are constants.
+    # Probabilistic model:
+    # x[n] = W*z[n] + m + ε, where W is a matrix, m is a vector and ε is a noise term
+    # z[n] ~ N(0,I), where I is the identity matrix
+    # ε ~ N(0, v*I), where v is a scalar
+
+    N = size(X, 2); D = size(X, 1)
     missing_values = isnan(X)
     has_missing_values = sum(missing_values) > 0
-    e_X = copy(X) # E[X.-μ]
-    e_X[missing_values] = 0.0 # set missing values to 0.0 to ignore them in mean calculation
-    μ = ( sum(e_X, 2) ./ (N*ones(D)-sum(missing_values,2)) )[:,1] # make sure missing values don't influence the mean. [:,1] makes sure this is a Vector
-    e_X = X .- μ
-    e_X[missing_values] = 0.0 # Initialize expected value of missing values to the mean
-    e_xx = [(e_X[:,n]'*e_X[:,n])[1,1] for n=1:N] # E[(x-μ)' * (x-μ)]
 
-    # Initialize variables
-    θ = pPCAParams(Matrix{Float64}(D,M), μ, 0.0) # θ holds the parameters
-    e_z = [randn(M) for i=1:N]        # e_z[n] = E[z_n]
-    e_zz = Vector{Matrix{Float64}}(N) # e_zz[n] = E[z_n * z_n']
-    for n=1:N
-        e_zz[n] = e_z[n] * e_z[n]'
+    # Find row means of X, ignoring missing values
+    if has_missing_values
+        X[missing_values] = 0.0
+        m = ( sum(X, 2) ./ (N*ones(D) - sum(missing_values,2)) )[:,1] # [:,1] makes sure this is a vector
+        X[missing_values] = NaN
+        observed_d = [find(!missing_values[:,n]) for n=1:N] # observed dimensions for every data vector
+        observed_n = [find(!missing_values[d,:]) for d=1:D] # observed value indexes per dimension
+        x_observed = [X[observed_d[n],n] for n=1:N]  # data vectors without the missing data
+    else
+        m = ( sum(X, 2) ./ N )[:,1] # [:,1] makes sure this is a vector
+        _X = X .- m # shift data to be zero-mean
     end
 
-    function eStep!(e_z, e_zz, e_X, e_xx)
-        # Update e_z and e_zz
-        W = θ.W; σ2 = θ.σ2
-        R = W'*W + σ2*eye(M)
-        K = inv(R) * W'
-        C = σ2*inv(R)
+    # Initialize variables
+    θ = pPCAParams(Matrix{Float64}(D,M), m, 1.0) # θ holds the parameters
+    Mz = randn(M,N)              # Mz[:,n] = MEAN[z[n]]
+    Σz = [zeros(M,M) for n=1:N]  # Σz[n] = COV[z[n]]
 
-        e_X[missing_values] = 0.0 # ignore missing values in calculation of e_z
-        for n=1:N
-            e_z[n] = K * e_X[:,n]
-            e_zz[n] = C + e_z[n] * e_z[n]'
-        end
+    function eStep!(Mz, Σz)
+        # Update Mz and Σz
+        W = θ.W; v = θ.v
 
         if has_missing_values
-            # Update e_X and e_xx
-            for idx in find(missing_values)
-                n = Int(ceil(idx / D)) # index of data point
-                d = (idx-1)%D + 1 # dimension
-                e_X[d,n] = (W[d,:] * e_z[n])[1,1]
+            for n=1:N
+                _W = W[observed_d[n],:]
+                _x = x_observed[n] - θ.m[observed_d[n]]
+                M_inv = inv(_W'*_W + v*eye(M))
+                Σz[n] = v * M_inv
+                Mz[:,n] = M_inv * _W' * _x
             end
-            for n in find(sum(missing_values,1)) # every datapoint with at least 1 missing value
-                e_xx[n] = (e_X[:,n]'*e_X[:,n])[1,1] + sum(missing_values[:,n])*σ2
-            end
+        else
+            M_inv = inv(W'*W + v*eye(M))
+            Mz[:] = M_inv * W' * _X
+            Σz[1] = v * M_inv # COV[z[n]] is equal for all n. We only update the one for n=1
         end
     end
 
     function mStep!(θ)
-        # Update W and σ2
-        W1 = zeros(D,M)
-        for n=1:N
-            W1 += e_X[:,n] * e_z[n]'
-        end
-        W = W1 * inv(sum(e_zz))
-        θ.W = W
+        # Update W, m, v
+        if has_missing_values
+            m = zero(θ.m)
+            for n=1:N
+                m[observed_d[n]] += x_observed[n] - (θ.W[observed_d[n],:] * Mz[:,n])[:,1]
+            end
+            m = m ./ (N - sum(missing_values, 2)[:,1])
+            θ.m = m
 
-        accum = 0.0
-        W2 = W'*W
-        for n=1:N
-            accum += (e_xx[n] - 2 * e_z[n]' * W' *e_X[:,n] + trace(e_zz[n]*W2))[1,1]
+            for d=1:D
+                A = inv(Mz[:,observed_n[d]]*Mz[:,observed_n[d]]' + sum(Σz[observed_n[d]]))
+                b = zeros(M)
+                for n in observed_n[d]
+                    b += Mz[:,n]*(X[d,n] - m[d])
+                end
+                θ.W[d,:] = ( A * b )'
+            end
+            W = θ.W
+
+            θ.v = 0.0
+            for n=1:N
+                for d in observed_d[n]
+                    θ.v +=  (X[d,n] - (W[d,:]*Mz[:,n])[1] - m[d])^2 + (W[d,:] * Σz[n] * W[d,:]')[1]
+                end
+            end
+            θ.v = θ.v / (N*D-sum(missing_values))
+
+        else
+            # no need to update m
+            W = _X * Mz' * inv(Mz*Mz' + N*Σz[1])
+            θ.W = W
+            θ.v = sum((_X - W*Mz).^2)/(N*D) + trace(W*Σz[1]*W')/D
         end
-        θ.σ2 = accum / (N*D) # update σ2
     end
 
     for i=1:30 # Here should be a decent convergence check, but hey, this also works...
         mStep!(θ)
-        eStep!(e_z, e_zz, e_X, e_xx)
+        eStep!(Mz, Σz)
     end
 
-    # Collect E[z_1],...,E[z_N] in a matrix
-    Z = Matrix{Float64}(M,N)
-    for n=1:N
-        Z[:,n] = e_z[n]
-    end
-
-    return (θ, Z) # Z is actually redundant, but we return it for convenient plotting
+    return (θ, Mz) # Mz is actually redundant, but we return it for convenient plotting
 end
