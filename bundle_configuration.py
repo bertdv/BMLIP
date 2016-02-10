@@ -58,6 +58,18 @@ def concat_and_clean():
             # page that is found. Use that as the basis for the entire bundle
             if bundle_document == None:
                 bundle_document = html_source
+                body_node = bundle_document.xpath('//body')[0]
+
+                cover_file = open('cover.html', 'r', encoding='utf-8')
+                cover_source = html.fromstring(cover_file.read())
+                cover_file.close()
+
+                cover_styles = cover_source.xpath('//style')[0]
+                bundle_head = bundle_document.xpath('//head')[0]
+                bundle_head.insert(2, cover_styles)
+
+                cover_page = cover_source.get_element_by_id('cover-page')
+                body_node.insert(0, cover_page)
 
                 # Include the custom styles once, which would have otherwise be
                 # included by the final two cells in every rendered notebook
@@ -65,7 +77,6 @@ def concat_and_clean():
                 custom_style_elements = html.fragments_fromstring(bundle_file.read())
                 bundle_file.close()
 
-                body_node = bundle_document.xpath('//body')[0]
                 for element in reversed(custom_style_elements):
                     body_node.insert(0, element)
 
@@ -92,17 +103,7 @@ def concat_and_clean():
         bundle_file.write(html.tostring(bundle_document).decode('utf-8'))
         bundle_file.close()
 
-        # The javascript delay is necessary for MathJax to render all equations
-        # in the document
-        os.system("""wkhtmltopdf --enable-toc-back-links \
-                                 --footer-right "[page]/[toPage]" \
-                                 --javascript-delay 10000 \
-                                 --print-media-type \
-                                 --title AIP-5SSB0 \
-                                 cover ./cover.html \
-                                 toc \
-                                 {0} \
-                                 AIP-5SSB0.pdf""".format(bundle_filename))
+        os.system('phantomjs ./print_to_pdf.js bundle/bundle.html')
 
     shutil.rmtree(build_directory)
 

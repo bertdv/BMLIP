@@ -1,55 +1,58 @@
 /* The #notebook selector is there to make sure the styles override the
  * defaults through the cascade by being more specific */
 
-@media print {
-  body {
-    /* Positioning MUST be relative on any parents of the sections
-     * for the page-break directives to have any effect! */
-    position: relative !important;
-  }
+body {
+  /* Positioning MUST be relative on any parents of the sections
+   * for the page-break directives to have any effect! */
+  position: relative !important;
+  zoom: 0.6;
+}
 
-  /* The final section is excluded to prevent a final empty page
-   * from showing up */
-  section:not(:last-child) {
-    page-break-after: always;
-  }
+div.MathJax_Display {
+  padding-top: 1ex;
+}
 
-  #notebook div.cell {
-    width: 100%;
-  }
+/* The final section is excluded to prevent a final empty page
+ * from showing up */
+section:not(:last-child) {
+  page-break-after: always;
+}
 
-  #notebook div.output_stderr {
-    display: none;
-  }
+#notebook-container {
+  padding: 3em 6ex;
+}
 
-  #notebook div.prompt.input_prompt {
-    display: none;
-  }
+#notebook div.output_stderr, #notebook div.prompt {
+  display: none;
+}
 
-  #notebook div.text_cell_render {
-    font-size: 11pt;
-    width: 100%;
-  }
+#notebook .input_area, #notebook .output_area {
+  width: 85%;
+  margin: 0 auto;
+}
 
-  #notebook div.text_cell_render h1 {
-    font-size: 33pt;
-    margin: 0;
-  }
+#notebook .output_subarea {
+  margin: 0 auto;
+  overflow-x: hidden;
+}
 
-  #notebook div.text_cell_render h3 {
-    font-size: 16pt;
-  }
+#notebook div.code_cell {
+  margin: 0;
+}
 
-  #notebook div.text_cell_render h4 {
-    font-size: 12pt;
-    margin: 2ex 0;
-  }
+#notebook div.text_cell_render {
+  font-size: 11pt;
+}
 
-  #notebook div.text_cell.rendered .rendered_html {
-    overflow: hidden;
-  }
+#notebook div.text_cell_render h1 {
+  font-size: 33pt;
+  margin: 1ex 0 0 0;
+}
 
-  #notebook .highlight .err {
-    border: none;
-  }
+#notebook div.text_cell.rendered .rendered_html {
+  overflow: hidden;
+}
+
+#notebook .highlight .err {
+  border: none;
 }
