@@ -53,7 +53,11 @@ page.onError = function(msg, trace) {
 page.paperSize = {
   footer: {
     contents: phantom.callback(function(pageNum, numPages) {
-      return '<span style="float: right">' + pageNum + '/' + numPages + '</span>';
+      if(pageNum > 1) {
+        return '<span style="float: right; font-size: 75%">' + pageNum + '/' + numPages + '</span>';
+      } else {
+        return '';
+      }
     }),
     height: '1.2cm',
   },
