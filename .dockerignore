@@ -1,0 +1,5 @@
+*.pdf
+bundle/
+Dockerfile
+LICENSE
+README.md
