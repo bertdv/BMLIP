@@ -5,9 +5,27 @@
     <title>AIP-5SSB0 - Adaptive Information Processing</title>
     <style>
       #cover-page {
-        padding-bottom: 60%;
         padding-top: 50%;
+      }
+
+      #cover-page > :not(.toc) {
         text-align: center;
+      }
+
+      #cover-page .toc {
+        padding: 2em 2ex;
+        page-break-before: always;
+        page-break-after: always;
+      }
+
+      #cover-page .toc > ul > li {
+        padding-top: 2ex;
+        page-break-inside: avoid;
+      }
+
+      /* Hide the cover page headers from the table of contents */
+      #cover-page .toc > ul > li:first-child {
+        display: none;
       }
     </style>
   </head>
@@ -32,6 +50,7 @@
       <h4>
         <a href="mailto:m.g.h.cox@tue.nl">Marco Cox</a> (Flux 7.060)
       </h4>
+      <!-- toc -->
     </div>
   </body>
 </html>

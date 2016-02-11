@@ -37,7 +37,9 @@ RUN mkdir -p /aip-5ssb0-bundler/ && \
     rm -rf /var/lib/apt/lists/ && \
     mkdir -p /opt/node && \
     tar --strip-components 1 -zxf /tmp/node-v5.6.0-linux-x64.tar.gz -C /opt/node && \
-    npm install -g phantomjs-prebuilt
+    npm install -g phantomjs-prebuilt && \
+    cd bundler && \
+    npm install toc
 
 ADD [".", "/aip-5ssb0-bundler/"]
 WORKDIR /aip-5ssb0-bundler/

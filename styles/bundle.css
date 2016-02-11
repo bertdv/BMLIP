@@ -2,6 +2,7 @@
  * defaults through the cascade by being more specific */
 
 body {
+  padding: 3em 6ex;
   /* Positioning MUST be relative on any parents of the sections
    * for the page-break directives to have any effect! */
   position: relative !important;
@@ -20,10 +21,6 @@ div.MathJax_Display {
  * from showing up */
 section:not(:last-child) {
   page-break-after: always;
-}
-
-#notebook-container {
-  padding: 3em 6ex;
 }
 
 #notebook div.output_stderr, #notebook div.prompt {
