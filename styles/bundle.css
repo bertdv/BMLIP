@@ -8,6 +8,10 @@ body {
   zoom: 0.6;
 }
 
+body a[href]:after {
+  content: '';
+}
+
 div.MathJax_Display {
   padding-top: 1ex;
 }
