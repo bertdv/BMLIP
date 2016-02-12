@@ -13,7 +13,7 @@ function genDataset(N::Int64)
             if rand()<0.5
                 X[:,n] = [6.0; 0.5] .* rand(2) + [3.0; 6.0]
             else
-                X[:,n] = sqrt(0.5) * randn(2) + [7.0, 0.0]
+                X[:,n] = sqrt(0.5) * randn(2) + [5.5, 0.0]
             end
         else
             # Sample class 2 conditional distribution
