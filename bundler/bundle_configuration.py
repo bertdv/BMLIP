@@ -31,7 +31,7 @@ ipynb_files.sort()
 # Some cells can take quite a while to render (most notably the lesson on
 # clustering with Gaussian Mixture Models), so the timeout has to be increased
 # with respect to the default of 30 seconds
-c.ExecutePreprocessor.timeout = 60
+c.ExecutePreprocessor.timeout = 120
 c.FilesWriter.build_directory = build_directory
 c.NbConvertApp.notebooks = ipynb_files
 c.Preprocessor.enabled = True
