@@ -50,7 +50,7 @@ capture(page, 'bundle/bundle_with_toc.html', function(error) {
     console.error('Error', error);
     phantom.exit(1);
   } else {
-    page.render('AIP-5SSB0.pdf', { format: 'pdf' });
+    page.render('output/AIP-5SSB0.pdf', { format: 'pdf' });
     phantom.exit(0);
   }
 });

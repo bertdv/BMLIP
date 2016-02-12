@@ -60,7 +60,7 @@ def concat_and_clean():
                 bundle_document = html_source
                 body_node = bundle_document.xpath('//body')[0]
 
-                cover_file = open('bundler/cover.html', 'r', encoding='utf-8')
+                cover_file = open('./cover.html', 'r', encoding='utf-8')
                 cover_source = html.fromstring(cover_file.read())
                 cover_file.close()
 
@@ -103,7 +103,7 @@ def concat_and_clean():
         bundle_file.write(html.tostring(bundle_document).decode('utf-8'))
         bundle_file.close()
 
-        os.system('phantomjs ./bundler/print_to_pdf.js bundle/bundle.html')
+        os.system('phantomjs ./print_to_pdf.js bundle/bundle.html')
 
     shutil.rmtree(build_directory)
 

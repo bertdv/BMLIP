@@ -8,7 +8,10 @@ ENV PYTHON /usr/bin/python3
 
 ADD ["https://nodejs.org/dist/v5.6.0/node-v5.6.0-linux-x64.tar.gz", "/tmp/"]
 
-RUN mkdir -p /aip-5ssb0-bundler/ && \
+ADD ["bundler/", "/aip-5ssb0-bundler/"]
+ADD ["styles/", "/aip-5ssb0-bundler/styles"]
+
+RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     locale-gen en_US.UTF-8 && \
     apt-get update && \
     apt-get install -y build-essential \
@@ -38,12 +41,12 @@ RUN mkdir -p /aip-5ssb0-bundler/ && \
     mkdir -p /opt/node && \
     tar --strip-components 1 -zxf /tmp/node-v5.6.0-linux-x64.tar.gz -C /opt/node && \
     npm install -g phantomjs-prebuilt && \
-    cd bundler && \
+    cd /aip-5ssb0-bundler && \
     npm install toc
 
-ADD [".", "/aip-5ssb0-bundler/"]
-WORKDIR /aip-5ssb0-bundler/
+VOLUME /aip-5ssb0-bundler/lessons
+VOLUME /aip-5ssb0-bundler/output
 
-VOLUME /aip-5ssb0-bundler/
+WORKDIR /aip-5ssb0-bundler/
 
 CMD ["jupyter", "nbconvert", "--config", "bundle_configuration.py"]

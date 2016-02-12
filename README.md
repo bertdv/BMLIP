@@ -89,11 +89,13 @@ Install Docker from https://www.docker.com. Then from the root
 directory of the project issue
 
 ```sh
-$ docker build -t aip-5ssb0-bundler bundler
-$ docker run --rm -it --volume ${PWD}:/aip-5ssb0-bundler aip-5ssb0-bundler
+$ docker build -t aip-5ssb0-bundler .
+$ docker run --rm \
+             --volume ${PWD}/lessons:/aip-5ssb0-bundler/lessons \
+             --volume ${PWD}/output:/aip-5sbb0-bundler/output aip-5ssb0-bundler
 ```
 
-to obtain a `bundle.pdf` file containing all lessons.
+to obtain a `bundle.pdf` file containing all lessons in the `output` directory.
 
 #### License
 
