@@ -16,24 +16,21 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     apt-get update && \
     apt-get install -y build-essential \
                        curl \
-                       libfontconfig1-dev \
-                       libfreetype6-dev \
-                       liblapack-dev \
                        libnettle4 \
-                       libopenblas-dev \
-                       libpng12-dev \
-                       libxml2-dev \
-                       libxslt1-dev \
                        libzmq3-dev \
                        pkg-config \
+                       python3-cairo \
                        python3-dev \
+                       python3-lxml \
+                       python3-matplotlib \
+                       python3-pip \
+                       python3-pyqt4 \
                        software-properties-common \
-                       subversion \
-                       zlib1g-dev && \
+                       subversion && \
     apt-add-repository ppa:staticfloat/juliareleases && \
     apt-get update && \
-    apt-get install -y julia python3-pip && \
-    pip3 install jupyter lxml matplotlib && \
+    apt-get install -y julia && \
+    pip3 install cython jupyter && \
     julia -e 'Pkg.add("Cubature"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("IJulia")' && \
     apt-get autoremove -y && \
     apt-get clean && \
