@@ -163,9 +163,12 @@ code {
   border-radius: 2px !important;
 }
 
-/* This removes the actual style cells from the notebooks */
-.cell:nth-last-child(-n+2) {
-  display: none;
+/* This removes the actual style cells from the notebooks, but no in print mode
+   as they will be removed through some other method */
+@media not print {
+  .cell:nth-last-child(-n+2) {
+    display: none;
+  }
 }
 
 </style>

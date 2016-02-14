@@ -1,0 +1,59 @@
+/* The #notebook selector is there to make sure the styles override the
+ * defaults through the cascade by being more specific */
+
+body {
+  padding: 3em 6ex;
+  /* Positioning MUST be relative on any parents of the sections
+   * for the page-break directives to have any effect! */
+  position: relative !important;
+  zoom: 0.6;
+}
+
+body a[href]:after {
+  content: '';
+}
+
+div.MathJax_Display {
+  padding-top: 1ex;
+}
+
+/* The final section is excluded to prevent a final empty page
+ * from showing up */
+section:not(:last-child) {
+  page-break-after: always;
+}
+
+#notebook div.output_stderr, #notebook div.prompt {
+  display: none;
+}
+
+#notebook .input_area, #notebook .output_area {
+  width: 85%;
+  margin: 0 auto;
+}
+
+#notebook .output_subarea {
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+#notebook div.code_cell {
+  margin: 0;
+}
+
+#notebook div.text_cell_render {
+  font-size: 11pt;
+}
+
+#notebook div.text_cell_render h1 {
+  font-size: 33pt;
+  margin: 1ex 0 0 0;
+}
+
+#notebook div.text_cell.rendered .rendered_html {
+  overflow: hidden;
+}
+
+#notebook .highlight .err {
+  border: none;
+}

@@ -83,6 +83,19 @@ Follow these instructions to run the code examples from the lecture notes online
 
 You can now open the lecture notes by going to the `IJulia` tab (press the refresh button if the folder `AIP-5SSB0` does not show up). Navigate to a specific lesson and click the `.ipynb` file to open the notebook.
 
+### Creating a PDF bundle of all lessons
+
+Install Docker from https://www.docker.com. Then from the root
+directory of the project issue
+
+```sh
+$ docker build -t aip-5ssb0-bundler .
+$ docker run --rm \
+             --volume ${PWD}/lessons:/aip-5ssb0-bundler/lessons \
+             --volume ${PWD}/output:/aip-5sbb0-bundler/output aip-5ssb0-bundler
+```
+
+to obtain a `bundle.pdf` file containing all lessons in the `output` directory.
 
 #### License
 
