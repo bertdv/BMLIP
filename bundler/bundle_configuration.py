@@ -174,6 +174,35 @@ def concat_and_clean():
         target_pdf = PyPDF2.PdfFileWriter()
         target_pdf.appendPagesFromReader(source_pdf)
 
+        # Manually add page numbers to the table of contents
+        toc_stream = StringIO.StringIO()
+        toc_canvas = canvas.Canvas(toc_stream, pagesize = A4)
+        current_page = 0
+
+        # The first page is the cover page, and thus empty as far as the table of
+        # contents is concerned
+        def getPageNumber(toc_item):
+            return links[toc_item][0]
+
+        toc_links = [link for link in links if link[0:4] == 'toc-']
+        for toc_link in sorted(toc_links, key = getPageNumber):
+            link_data = links[toc_link]
+            if link_data[0] > current_page:
+                toc_canvas.showPage()
+                current_page = links[toc_link][0]
+
+            target_name = toc_link[4:]
+            if target_name in links:
+                target_data = links[target_name]
+                toc_canvas.drawRightString(575, -10 + link_data[1], '%d' % (target_data[0] + 1))
+        toc_canvas.save()
+
+        toc_stream.seek(0)
+        toc_pdf = PyPDF2.PdfFileReader(toc_stream)
+        for page_number in range(1, toc_pdf.getNumPages()):
+            target_page = target_pdf.getPage(page_number)
+            target_page.mergePage(toc_pdf.getPage(page_number))
+
         target_file = open('output/AIP-5SSB0.pdf', 'wb')
         target_pdf.write(target_file)
         target_file.close()
