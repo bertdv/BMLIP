@@ -3,6 +3,8 @@ import PyPDF2, atexit, io, os, re, shutil
 from PyPDF2.generic import ArrayObject, NameObject, NumberObject
 from lxml import html
 from pathlib import Path
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 
 build_directory = 'bundle'
 
