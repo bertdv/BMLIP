@@ -1,5 +1,4 @@
-import atexit, os, re, shutil
-import PyPDF2
+import PyPDF2, atexit, io, os, re, shutil
 
 from PyPDF2.generic import ArrayObject, NameObject, NumberObject
 from lxml import html
@@ -175,7 +174,7 @@ def concat_and_clean():
         target_pdf.appendPagesFromReader(source_pdf)
 
         # Manually add page numbers to the table of contents
-        toc_stream = StringIO.StringIO()
+        toc_stream = io.StringIO()
         toc_canvas = canvas.Canvas(toc_stream, pagesize = A4)
         current_page = 0
 
