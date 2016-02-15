@@ -30,7 +30,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     apt-add-repository ppa:staticfloat/juliareleases && \
     apt-get update && \
     apt-get install -y julia && \
-    pip3 install cython jupyter && \
+    pip3 install cython jupyter PyPDF2 && \
     julia -e 'Pkg.add("Cubature"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("IJulia")' && \
     apt-get autoremove -y && \
     apt-get clean && \
