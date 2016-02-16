@@ -43,6 +43,9 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     cd /aip-5ssb0-bundler && \
     npm install toc
 
+ADD ["ForneyLab.jl", "/root/.julia/v0.4/ForneyLab"]
+RUN julia -e 'Pkg.resolve()'
+
 VOLUME /aip-5ssb0-bundler/lessons
 VOLUME /aip-5ssb0-bundler/output
 

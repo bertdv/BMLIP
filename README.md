@@ -85,14 +85,26 @@ You can now open the lecture notes by going to the `IJulia` tab (press the refre
 
 ### Creating a PDF bundle of all lessons
 
-Install Docker from https://www.docker.com. Then from the root
-directory of the project issue
+This procedure will only be able to generate the PDF bundle for all lessons if
+ForneyLab is available as it is used for the later chapters. This is not
+publicly available software, so the functionality is limited for those who do
+not have access to it.
+
+Get ForneyLab.jl. Either clone it in the root of the project or modify the path
+in the Dockerfile to point at your own installation. If you do not have access
+to it, but do want to generate a PDF of the remaining lessons, just create an
+empty `ForneyLab.jl` directory.
+
+Install Docker from https://www.docker.com.
+
+Finally from the root directory of the project issue
 
 ```sh
 $ docker build -t aip-5ssb0-bundler .
 $ docker run --rm \
              --volume ${PWD}/lessons:/aip-5ssb0-bundler/lessons \
-             --volume ${PWD}/output:/aip-5sbb0-bundler/output aip-5ssb0-bundler
+             --volume ${PWD}/output:/aip-5sbb0-bundler/output \
+             aip-5ssb0-bundler
 ```
 
 to obtain a `bundle.pdf` file containing all lessons in the `output` directory.
