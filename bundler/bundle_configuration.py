@@ -1,5 +1,6 @@
-import PyPDF2, atexit, io, os, re, shutil
+import atexit, io, os, re, shutil
 
+from PyPDF2 import PdfFileReader, PdfFileWriter
 from PyPDF2.generic import ArrayObject, NameObject, NumberObject
 from lxml import html
 from pathlib import Path
@@ -119,7 +120,7 @@ def concat_and_clean():
         # be linked from. Then in the second pass, all links are updated to
         # point to the correct page and offset on that page based on the
         # information gathered in the first pass.
-        source_pdf = PyPDF2.PdfFileReader('output/AIP-5SSB0.pdf')
+        source_pdf = PdfFileReader('output/AIP-5SSB0.pdf')
 
         # Link dictionaries store links using their names as key with tuples
         # specifying their corresponding (page, ...) as values
@@ -172,7 +173,7 @@ def concat_and_clean():
                                 NameObject('/Rect'): ArrayObject([NumberObject(0), NumberObject(0), NumberObject(0), NumberObject(0)])
                             })
 
-        target_pdf = PyPDF2.PdfFileWriter()
+        target_pdf = PdfFileWriter()
         target_pdf.appendPagesFromReader(source_pdf)
 
         # Manually add page numbers to the table of contents
@@ -199,7 +200,7 @@ def concat_and_clean():
         toc_canvas.save()
 
         toc_stream.seek(0)
-        toc_pdf = PyPDF2.PdfFileReader(toc_stream)
+        toc_pdf = PdfFileReader(toc_stream)
         for page_number in range(1, toc_pdf.getNumPages()):
             target_page = target_pdf.getPage(page_number)
             target_page.mergePage(toc_pdf.getPage(page_number))
