@@ -1,7 +1,8 @@
-import atexit, io, os, re, shutil
+import atexit, os, re, shutil
 
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from PyPDF2.generic import ArrayObject, NameObject, NumberObject
+from io import BytesIO
 from lxml import html
 from pathlib import Path
 from reportlab.pdfgen import canvas
@@ -177,7 +178,7 @@ def concat_and_clean():
         target_pdf.appendPagesFromReader(source_pdf)
 
         # Manually add page numbers to the table of contents
-        toc_stream = io.StringIO()
+        toc_stream = BytesIO()
         toc_canvas = canvas.Canvas(toc_stream, pagesize = A4)
         current_page = 0
 
