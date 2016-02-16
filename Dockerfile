@@ -16,6 +16,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     apt-get update && \
     apt-get install -y build-essential \
                        curl \
+                       libjpeg-dev \
                        libnettle4 \
                        libzmq3-dev \
                        pkg-config \
@@ -26,11 +27,12 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
                        python3-pip \
                        python3-pyqt4 \
                        software-properties-common \
-                       subversion && \
+                       subversion \
+                       zlib1g-dev && \
     apt-add-repository ppa:staticfloat/juliareleases && \
     apt-get update && \
     apt-get install -y julia && \
-    pip3 install cython jupyter && \
+    pip3 install cython jupyter PyPDF2 reportlab && \
     julia -e 'Pkg.add("Cubature"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("IJulia")' && \
     apt-get autoremove -y && \
     apt-get clean && \
@@ -40,6 +42,9 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     npm install -g phantomjs-prebuilt && \
     cd /aip-5ssb0-bundler && \
     npm install toc
+
+ADD ["ForneyLab.jl", "/root/.julia/v0.4/ForneyLab"]
+RUN julia -e 'Pkg.resolve()'
 
 VOLUME /aip-5ssb0-bundler/lessons
 VOLUME /aip-5ssb0-bundler/output

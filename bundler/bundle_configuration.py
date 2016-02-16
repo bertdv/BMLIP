@@ -1,7 +1,12 @@
 import atexit, os, re, shutil
 
+from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2.generic import ArrayObject, NameObject, NumberObject
+from io import BytesIO
 from lxml import html
 from pathlib import Path
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 
 build_directory = 'bundle'
 
@@ -104,6 +109,106 @@ def concat_and_clean():
         bundle_file.close()
 
         os.system('phantomjs ./print_to_pdf.js bundle/bundle.html')
+
+        # The generated PDF file contains incorrect URIs for the table of
+        # contents and the backlinks to the items in it. What used to be
+        # 'internal' URIs in the HTML document have become 'external' URIs in
+        # the PDF document. These have to be rewritten using a two-pass
+        # mechanism. First the location of each of the links (both in the table
+        # of contents as in the actual document) are collected. These should,
+        # mostly, come in pairs. In the first pass, the location of each of
+        # these links is recorded and stored with respect to the link it should
+        # be linked from. Then in the second pass, all links are updated to
+        # point to the correct page and offset on that page based on the
+        # information gathered in the first pass.
+        source_pdf = PdfFileReader('output/AIP-5SSB0.pdf')
+
+        # Link dictionaries store links using their names as key with tuples
+        # specifying their corresponding (page, ...) as values
+        links = dict()
+
+        # Collect pages and offsets for all internal links
+        for page_number in range(0, source_pdf.getNumPages()):
+            page = source_pdf.getPage(page_number)
+            annotations = page['/Annots'].getObject()
+            for annotation in annotations:
+                object = annotation.getObject()
+                link = object['/A']
+                uri = link['/URI']
+                if uri[0:7] == 'file://':
+                    uri_parts = uri.split('#')
+                    if len(uri_parts) > 1:
+                        # This is an internal URI
+                        if uri_parts[1][0:4] == 'toc-':
+                            key = uri_parts[1][4:]
+                            links[key] = (page_number, object['/Rect'][3])
+                        else:
+                            links['toc-' + uri_parts[1]] = (page_number, object['/Rect'][3])
+
+        # Modify all links to point to the proper internal locations
+        for page_number in range(0, source_pdf.getNumPages()):
+            page = source_pdf.getPage(page_number)
+            annotations = page['/Annots'].getObject()
+            for annotation in annotations:
+                object = annotation.getObject()
+                link = object['/A']
+                uri = link['/URI']
+                if uri[0:7] == 'file://':
+                    uri_parts = uri.split('#')
+                    if len(uri_parts) > 1:
+                        # Always remove the URI pointing to the non-existent
+                        # external file
+                        del link['/URI']
+
+                        # Not all link targets actually exist in the document (such
+                        # as those on the first page), these have to be ignored
+                        if uri_parts[1] in links:
+                            link_data = links[uri_parts[1]]
+                            link.update({
+                                NameObject('/D'): ArrayObject([NumberObject(link_data[0]), NameObject('/FitH'), NumberObject(link_data[1])]),
+                                NameObject('/S'): NameObject('/GoTo')
+                            })
+                        else:
+                            # Update the rectangle to effectively disable the link
+                            object.update({
+                                NameObject('/Rect'): ArrayObject([NumberObject(0), NumberObject(0), NumberObject(0), NumberObject(0)])
+                            })
+
+        target_pdf = PdfFileWriter()
+        target_pdf.appendPagesFromReader(source_pdf)
+
+        # Manually add page numbers to the table of contents
+        toc_stream = BytesIO()
+        toc_canvas = canvas.Canvas(toc_stream, pagesize = A4)
+        current_page = 0
+
+        # The first page is the cover page, and thus empty as far as the table of
+        # contents is concerned
+        def getPageNumber(toc_item):
+            return links[toc_item][0]
+
+        toc_links = [link for link in links if link[0:4] == 'toc-']
+        for toc_link in sorted(toc_links, key = getPageNumber):
+            link_data = links[toc_link]
+            if link_data[0] > current_page:
+                toc_canvas.showPage()
+                current_page = links[toc_link][0]
+
+            target_name = toc_link[4:]
+            if target_name in links:
+                target_data = links[target_name]
+                toc_canvas.drawRightString(575, -10 + link_data[1], '%d' % (target_data[0] + 1))
+        toc_canvas.save()
+
+        toc_stream.seek(0)
+        toc_pdf = PdfFileReader(toc_stream)
+        for page_number in range(1, toc_pdf.getNumPages()):
+            target_page = target_pdf.getPage(page_number)
+            target_page.mergePage(toc_pdf.getPage(page_number))
+
+        target_file = open('output/AIP-5SSB0.pdf', 'wb')
+        target_pdf.write(target_file)
+        target_file.close()
 
     shutil.rmtree(build_directory)
 
