@@ -38,10 +38,10 @@ $ jupyter notebook
 
 You will now get a new page in your browser with a list of available notebooks. Alternatively, if you don't have Julia/Jupyter installed on your system, you can use [JuliaBox](https://www.juliabox.com/) to run the notebooks (see exact instructions below).
 
-To run the interactive code examples in the lecture nodes, the following Julia packages are required: `Cubature`, `DataFrames`, `Distributions`, `Interact`, `PyPlot`. To install the required packages, execute:
+To run the interactive code examples in the lecture nodes, the following Julia packages are required: `Cubature`, `DataFrames`, `Distributions`, `Interact`, `PyPlot`, `Optim`. To install the required packages, execute:
 
 ```jl
-map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot"])
+map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot", "Optim"])
 ```
 
 ### Running the lecture notes on JuliaBox.com
