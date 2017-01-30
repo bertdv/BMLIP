@@ -92,7 +92,7 @@ function pPCA(X::Matrix, M::Int64)
             θ.v = 0.0
             for n=1:N
                 for d in observed_d[n]
-                    θ.v +=  (X[d,n] - (W[d,:]*Mz[:,n])[1] - m[d])^2 + (W[d,:] * Σz[n] * W[d,:]')[1]
+                    θ.v +=  (X[d,n] - (W[d,:]'*Mz[:,n])[1] - m[d])^2 + (W[d,:]' * Σz[n] * W[d,:])[1]
                 end
             end
             θ.v = θ.v / (N*D-sum(missing_values))
