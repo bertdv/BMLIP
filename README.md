@@ -1,8 +1,8 @@
-## Adaptive Information Processing    
+## Adaptive Information Processing
 
-**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox**    
-Eindhoven University of Technology, Dept. of Electrical Engineering    
-Corr. to <bert.de.vries@tue.nl>    
+**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox**
+Eindhoven University of Technology, Dept. of Electrical Engineering
+Corr. to <bert.de.vries@tue.nl>
 
 This site contains materials for course [5SSB0 (Adaptive Information Processing)](http://bertdv.github.io/teaching/AIP-5SSB0/) at [TU/e](http://tue.nl).
 
@@ -36,7 +36,7 @@ To open the lecture notes in [IJulia](https://github.com/JuliaLang/IJulia.jl), d
 $ jupyter notebook
 ```
 
-You will now get a new page in your browser with a list of available notebooks. Alternatively, if you don't have Julia/Jupyter installed on your system, you can use [JuliaBox](https://www.juliabox.org/) to run the notebooks (see exact instructions below).
+You will now get a new page in your browser with a list of available notebooks. Alternatively, if you don't have Julia/Jupyter installed on your system, you can use [JuliaBox](https://www.juliabox.com/) to run the notebooks (see exact instructions below).
 
 To run the interactive code examples in the lecture nodes, the following Julia packages are required: `Cubature`, `DataFrames`, `Distributions`, `Interact`, `PyPlot`. To install the required packages, execute:
 
@@ -44,28 +44,15 @@ To run the interactive code examples in the lecture nodes, the following Julia p
 map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot"])
 ```
 
-### Running the lecture notes on JuliaBox.org
+### Running the lecture notes on JuliaBox.com
 
-Follow these instructions to run the code examples from the lecture notes online through [JuliaBox](https://www.juliabox.org/).
+Follow these instructions to run the code examples from the lecture notes online through [JuliaBox](https://www.juliabox.com/).
 
 1. **(Create account)**
-   Go to https://www.juliabox.org/, create an account and log in.
-2. **(Necessary JuliaBox hack)**
-   Click the 'IJulia tab', and then create a new text file using `New -> Text File`.
-   Paste the following content in the new file:
+   Go to https://www.juliabox.com/, create an account and log in.
 
-   ```
-   VERSION >= v"0.4" && splice!(Base.LOAD_CACHE_PATH, 3)
-   ```
-
-   Then, press `ctrl+s` to save the file and close the browser tab. Back in the IJulia file explorer, click the checkbox in front of `untitled.txt`, click `Rename`, and rename the file to `.juliarc.jl`.
-
-3. **(Install required packages)**
-   Go to the `Console` tab, and then start a Julia v0.4.3 shell by typing
-
-   ```
-   /opt/julia-0.4.3/bin/julia
-   ```
+2. **(Install required packages)**
+   Go to the `Console` tab, and then start a Julia shell by typing `julia`.
 
    In the Julia shell, execute the following command to install all required packages:
 
@@ -75,13 +62,13 @@ Follow these instructions to run the code examples from the lecture notes online
 
    Afterwards, type `exit()` to quit Julia.
 
-4. **(Import lecture notes into JuliaBox)**
-   Go to the `Sync` tab, and add the lecture notes git repository through the following actions: 
+3. **(Import lecture notes into JuliaBox)**
+   Go to the `Sync` tab, and add the lecture notes git repository through the following actions:
  1. Paste `https://github.com/bertdv/AIP-5SSB0.git` in the `Git Clone URL` field
  2. Click with the mouse in the `branch` field. You should get `master` in the `branch` field and `AIP-5SSB0` in the `juliabox` field.
- 3. Press the plus-sign.
+ 3. Press the "+" button.
 
-You can now open the lecture notes by going to the `IJulia` tab (press the refresh button if the folder `AIP-5SSB0` does not show up). Navigate to a specific lesson and click the `.ipynb` file to open the notebook.
+You can now open the lecture notes by going to the `Jupyter` tab (press the refresh button if the folder `AIP-5SSB0` does not show up). Navigate to a specific lesson and click the `.ipynb` file to open the notebook.
 
 ### Creating a PDF bundle of all lessons
 
