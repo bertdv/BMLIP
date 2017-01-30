@@ -38,8 +38,9 @@ while(true)
     μ_hat = (X * γ') ./ m'
     for k=1:2
         μ_k = μ_hat[:,k]
-        Σ_k = (((X .- μ_k) .* γ[k,:]) * (X .- μ_k)') / m[k]
-        clusters[k] = MvNormal(μ_k, Σ_k)
+        Z = (X .- μ_k)
+        Σ_k = Hermitian(((Z .* (γ[k,:])') * Z') / m[k])
+        clusters[k] = MvNormal(μ_k, convert(Matrix, Σ_k))
     end
     clf(); plotGMM(X, clusters, γ)
     print("Press [enter] for E-step or [q] to quit: "); continueOrExit()
