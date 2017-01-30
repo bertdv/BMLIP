@@ -57,7 +57,7 @@ Follow these instructions to run the code examples from the lecture notes online
    In the Julia shell, execute the following command to install all required packages:
 
    ```jl
-   map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot"])
+   map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot", "Optim"])
    ```
 
    Afterwards, type `exit()` to quit Julia.
