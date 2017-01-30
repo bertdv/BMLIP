@@ -55,9 +55,9 @@ type LinearTransitionModelNode <: Node
         # Build internal factor graph
         outer_graph = currentGraph()
         self.internal_factorgraph = FactorGraph()
-        self.z_old = TerminalNode(vague(MvGaussianDistribution{D}), id=:z_old)
-        self.z_new = TerminalNode(vague(MvGaussianDistribution{D}), id=:z_new)
-        self.u = TerminalNode(vague(MvGaussianDistribution{D}), id=:u)
+        self.z_old = TerminalNode(vague(MvGaussian{D}), id=:z_old)
+        self.z_new = TerminalNode(vague(MvGaussian{D}), id=:z_new)
+        self.u = TerminalNode(vague(MvGaussian{D}), id=:u)
         g_A = GainNode(gain=A, id=:A)
         g_B = GainNode(gain=diagm(b), id=:B)
         add_input = AdditionNode()
@@ -87,10 +87,10 @@ import ForneyLab.sumProductRule!
 # Message towards z_old
 function sumProductRule!{D}(node::LinearTransitionModelNode,
                             outbound_interface_index::Type{Val{1}},
-                            outbound_dist::MvGaussianDistribution{D},
+                            outbound_dist::MvGaussian{D},
                             msg_1::Any,
-                            msg_2::Message{GaussianDistribution},
-                            msg_3::Message{MvGaussianDistribution{D}})
+                            msg_2::Message{Gaussian},
+                            msg_3::Message{MvGaussian{D}})
     outer_graph = currentGraph()
     setCurrentGraph(node.internal_factorgraph)
     node.u.value.m = mean(msg_2.payload)*ones(D)
@@ -108,9 +108,9 @@ end
 # Message towards z_new
 function sumProductRule!{D}(node::LinearTransitionModelNode,
                             outbound_interface_index::Type{Val{3}},
-                            outbound_dist::MvGaussianDistribution{D},
-                            msg_1::Message{MvGaussianDistribution{D}},
-                            msg_2::Message{GaussianDistribution},
+                            outbound_dist::MvGaussian{D},
+                            msg_1::Message{MvGaussian{D}},
+                            msg_2::Message{Gaussian},
                             msg_3::Any)
     outer_graph = currentGraph()
     setCurrentGraph(node.internal_factorgraph)

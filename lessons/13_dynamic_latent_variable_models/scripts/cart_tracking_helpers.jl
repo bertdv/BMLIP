@@ -35,9 +35,9 @@ function generateNoisyMeasurements( z_start::Vector{Float64},
     return x
 end
 
-function plotCartPrediction(prediction::MvGaussianDistribution{2},
-                            measurement::MvGaussianDistribution{2},
-                            corr_prediction::MvGaussianDistribution{2})
+function plotCartPrediction(prediction::MvGaussian{2},
+                            measurement::MvGaussian{2},
+                            corr_prediction::MvGaussian{2})
     # Make a fancy plot of the Kalman-filtered cart position
     p = Normal(mean(prediction)[1], var(prediction)[1])
     m = Normal(mean(measurement)[1], var(measurement)[1])
@@ -48,15 +48,15 @@ function plotCartPrediction(prediction::MvGaussianDistribution{2},
     bg_img = imread("figures/cart-bg.png")
     height = floor((plot_range[end] - plot_range[1])/3)
     imshow(bg_img, zorder=0, extent=[plot_range[1], plot_range[end], 0., height])
-    plot(plot_range, height*pdf(p, plot_range), "r-")
-    plot(plot_range, height*pdf(m, plot_range), "b-")
-    plot(plot_range, height*pdf(c, plot_range), "g-")
+    plot(plot_range, height*Distributions.pdf(p, plot_range), "r-")
+    plot(plot_range, height*Distributions.pdf(m, plot_range), "b-")
+    plot(plot_range, height*Distributions.pdf(c, plot_range), "g-")
     legend(["Prediction "*L"p(z[n]|z[n-1],u[n])",
             "Noisy measurement "*L"p(z[n]|x[n])",
             "Corrected prediction "*L"p(z[n]|z[n-1],u[n],x[n])"], prop=Dict("size"=>14), loc=1)
-    fill_between(plot_range, 0, height*pdf(p, plot_range), color="r", alpha=0.1)
-    fill_between(plot_range, 0, height*pdf(m, plot_range), color="b", alpha=0.1)
-    fill_between(plot_range, 0, height*pdf(c, plot_range), color="g", alpha=0.1)
+    fill_between(plot_range, 0, height*Distributions.pdf(p, plot_range), color="r", alpha=0.1)
+    fill_between(plot_range, 0, height*Distributions.pdf(m, plot_range), color="b", alpha=0.1)
+    fill_between(plot_range, 0, height*Distributions.pdf(c, plot_range), color="g", alpha=0.1)
     xlim([plot_range[1],plot_range[end]]); ylim([0.,height])
     ax=gca()
     ax[:yaxis][:set_visible](false)
