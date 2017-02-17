@@ -3,10 +3,12 @@ MAINTAINER Joris Kraak <me@joriskraak.nl>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG en_US.UTF-8
-ENV PATH /opt/node/bin:$PATH
+ENV PATH /opt/node/bin:/opt/julia/bin:$PATH
 ENV PYTHON /usr/bin/python3
 
 ADD ["https://nodejs.org/dist/v5.6.0/node-v5.6.0-linux-x64.tar.gz", "/tmp/"]
+
+ADD ["https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz", "/tmp/"]
 
 ADD ["bundler/", "/aip-5ssb0-bundler/"]
 ADD ["styles/", "/aip-5ssb0-bundler/styles"]
@@ -29,9 +31,8 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
                        software-properties-common \
                        subversion \
                        zlib1g-dev && \
-    apt-add-repository ppa:staticfloat/juliareleases && \
-    apt-get update && \
-    apt-get install -y julia && \
+    mkdir -p /opt/julia && \
+    tar --strip-components 1 -zxf /tmp/julia-0.5.0-linux-x86_64.tar.gz -C /opt/julia && \
     pip3 install cython jupyter PyPDF2 reportlab && \
     julia -e 'Pkg.add("Cubature"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("IJulia")' && \
     apt-get autoremove -y && \
@@ -43,7 +44,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     cd /aip-5ssb0-bundler && \
     npm install toc
 
-ADD ["ForneyLab.jl", "/root/.julia/v0.4/ForneyLab"]
+ADD ["ForneyLab.jl", "/root/.julia/v0.5/ForneyLab"]
 RUN julia -e 'Pkg.resolve()'
 
 VOLUME /aip-5ssb0-bundler/lessons
