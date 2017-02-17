@@ -96,6 +96,23 @@ $ docker run --rm \
 
 to obtain a `bundle.pdf` file containing all lessons in the `output` directory.
 
+#### Running Jupyter using the Docker image
+
+Sometimes it may be convenient or necessary to get access to
+Jupyter while it's running inside the Docker image. The
+following procedure can be used to achieve this:
+
+```sh
+$ docker run --rm -it \
+             --volume ${PWD}/lessons:/aip-5ssb0-bundler/lessons \
+             --volume ${PWD}/output:/aip-5sbb0-bundler/output \
+             --publish 8888:8888
+             aip-5ssb0-bundler jupyter notebook --ip 0.0.0.0
+```
+
+Then open the URL Jupyter reports in a browser, substituting
+`0.0.0.0` with `localhost`.
+
 #### License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Adaptive Information Processing (5SSB0)</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Bert de Vries, Tjalling Tjalkens and Marco Cox</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/bertdv/AIP-5SSB0" rel="dct:source">https://github.com/bertdv/AIP-5SSB0</a>.
