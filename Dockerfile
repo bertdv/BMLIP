@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.3
+FROM ubuntu:16.04
 MAINTAINER Joris Kraak <me@joriskraak.nl>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -19,7 +19,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
     apt-get install -y build-essential \
                        curl \
                        libjpeg-dev \
-                       libnettle4 \
+                       libnettle6 \
                        libzmq3-dev \
                        pkg-config \
                        python3-cairo \
