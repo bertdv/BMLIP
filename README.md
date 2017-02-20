@@ -106,7 +106,7 @@ following procedure can be used to achieve this:
 $ docker run --rm -it \
              --volume ${PWD}/lessons:/aip-5ssb0-bundler/lessons \
              --volume ${PWD}/output:/aip-5ssb0-bundler/output \
-             --publish 8888:8888
+             --publish 8888:8888 \
              aip-5ssb0-bundler jupyter notebook --ip 0.0.0.0
 ```
 
