@@ -13,7 +13,7 @@ ADD ["https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86
 ADD ["bundler/", "/aip-5ssb0-bundler/"]
 ADD ["styles/", "/aip-5ssb0-bundler/styles"]
 
-RUN mkdir -p /aip-5ssb0-bundler/lessons && \
+RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
     locale-gen en_US.UTF-8 && \
     apt-get update && \
     apt-get install -y build-essential \
