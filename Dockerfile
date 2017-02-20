@@ -47,9 +47,6 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons && \
 ADD ["ForneyLab.jl", "/root/.julia/v0.5/ForneyLab"]
 RUN julia -e 'Pkg.resolve()'
 
-VOLUME /aip-5ssb0-bundler/lessons
-VOLUME /aip-5ssb0-bundler/output
-
 WORKDIR /aip-5ssb0-bundler/
 
 CMD ["jupyter", "nbconvert", "--config", "bundle_configuration.py"]
