@@ -42,7 +42,7 @@ You will now get a new page in your browser with a list of available notebooks. 
 To run the interactive code examples in the lecture nodes, the following Julia packages are required: `Cubature`, `DataFrames`, `Distributions`, `Interact`, `PyPlot`, `Optim`. To install the required packages, execute:
 
 ```jl
-map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot", "Optim"])
+map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot", "Optim", "SpecialFunctions"])
 ```
 
 ### Running the lecture notes on JuliaBox.com
@@ -58,7 +58,7 @@ Follow these instructions to run the code examples from the lecture notes online
    In the Julia shell, execute the following command to install all required packages:
 
    ```jl
-   map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot", "Optim"])
+   map(Pkg.add, ["Cubature", "DataFrames", "Distributions", "Interact", "PyPlot", "Optim", "SpecialFunctions"])
    ```
 
    Afterwards, type `exit()` to quit Julia.
