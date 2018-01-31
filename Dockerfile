@@ -8,14 +8,15 @@ ENV PYTHON /usr/bin/python3
 
 ADD ["https://nodejs.org/dist/v7.5.0/node-v7.5.0-linux-x64.tar.xz", "/tmp/"]
 
-ADD ["https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz", "/tmp/"]
+ADD ["https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.2-linux-x86_64.tar.gz", "/tmp/"]
 
 ADD ["bundler/", "/aip-5ssb0-bundler/"]
 ADD ["styles/", "/aip-5ssb0-bundler/styles"]
 
 RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
-    locale-gen en_US.UTF-8 && \
     apt-get update && \
+    apt-get install -y locales && \
+    locale-gen en_US.UTF-8 && \
     apt-get install -y build-essential \
                        curl \
                        libjpeg-dev \
@@ -32,9 +33,9 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
                        subversion \
                        zlib1g-dev && \
     mkdir -p /opt/julia && \
-    tar --strip-components 1 -zxf /tmp/julia-0.5.0-linux-x86_64.tar.gz -C /opt/julia && \
+    tar --strip-components 1 -zxf /tmp/julia-0.6.2-linux-x86_64.tar.gz -C /opt/julia && \
     pip3 install cython jupyter PyPDF2 reportlab && \
-    julia -e 'Pkg.add("Cubature"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("IJulia")' && \
+    julia -e 'Pkg.add("Cubature"); Pkg.add("CSV"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("IJulia")' && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/ && \
@@ -44,7 +45,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
     cd /aip-5ssb0-bundler && \
     npm install toc
 
-ADD ["ForneyLab.jl", "/root/.julia/v0.5/ForneyLab"]
+ADD ["ForneyLab.jl", "/root/.julia/v0.6/ForneyLab"]
 RUN julia -e 'Pkg.resolve()'
 
 WORKDIR /aip-5ssb0-bundler/
