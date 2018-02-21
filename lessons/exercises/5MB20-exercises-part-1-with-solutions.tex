@@ -1,0 +1,671 @@
+\documentclass[a4paper]{article}
+
+
+%\usepackage[noanswer]{exercise}
+\usepackage{exercise}
+
+\usepackage{amssymb,amsmath,amsfonts}
+\usepackage{bm}
+\usepackage[pdftex]{graphicx}
+\usepackage{color}
+\usepackage[english]{babel}
+
+
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\trace}{\text{tr}}
+\newcommand{\diag}{\text{diag}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\var}{\mathrm{var}}
+
+
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+
+\def\r#1{{\color{red}#1}}
+\def\b#1{{\color{blue}#1}}
+\definecolor{mygreen}{rgb}{0,.5,0}
+\def\g#1{{\color{mygreen}#1}}
+
+\def\d#1{{\,\mathrm{d}#1}}
+
+%%
+%% switch here to produce the doc with and witout answers
+%%
+
+
+
+\title{5MB20 - Exercises Part 1: Linear Gaussian Models and EM}
+\date{course year 2010}
+
+
+\begin{document}
+\maketitle
+
+\textbf{Note}: For some of these exercises you will be able to find solutions quickly on the internet. Try to resist this route to solving the problems. You will not be graded for these exercises and solutions will be made available through the class web page. \textbf{Your ability to solve these exercises without external help (apart from Sam Roweis' cheat sheets) provides an excellent indicator of your readiness to pass the exam}. Finally, the provided solutions come without guarantee and cannot be used as `evidence' in case you choose to argue about your exam grade.
+
+\bigskip
+
+\begin{ExerciseList}
+
+%\Exercise[label={ex:ml-taxonomy}] Pick four applications from the \emph{`Some Machine Learning Applications'} slide and (shortly)
+%describe for each application how (a combination of) clustering, dimensionality reduction, regression and/or classification could accomplish the task.
+%\Answer[ref={ex:ml-taxonomy}]
+
+%\Exercise[label={ex:model-comparison},title={model comparison}] Given a set of observed data points $D$, a set of models $m \in \mathcal{M}$ and . Use Bayesian inference to get an expression for the posterior mode $p(m_j|D)/p(m_k|D)$.
+%\Answer[ref={ex:model-comparison}]
+
+% \Exercise[label={ex:intro-ML}] Read pp. 1-12 from Bishop.
+% \Answer[ref={ex:intro-ML}]
+
+
+\Exercise[label={ex:apples-oranges}] (lesson 2: Probability Theory). Box 1 contains 8 apples and 4 oranges. Box 2 contains 10 apples
+and 2 oranges. Boxes are chosen with equal probability.\\
+(a) What is the probability of choosing an
+apple?\\
+(b) If an apple is chosen, what is the probability that it came from box 1?
+
+\Answer[ref={ex:apples-oranges}] The following probabilities are given in the problem statement,
+\begin{gather*}
+p(b_1)=p(b_2)=1/2\\
+p(a|b_1) = 8/12 \qquad p(a|b_2)=10/12\\
+p(o|b_1) = 4/12 \qquad p(o|b_2)=2/12
+\end{gather*}
+(a) $p(a) = \sum_i p(a,b_i) = \sum_i p(a|b_i)p(b_i)=\frac{8}{12}\cdot\frac{1}{2} + \frac{10}{12}\cdot\frac{1}{2} = \frac{3}{4}$\\
+(b) $p(b_1|a) = \frac{p(a,b_1)}{p(a)} = \frac{p(a|b_1)p(b_1)}{p(a)} = \frac{\frac{8}{12}\cdot\frac{1}{2}}{\frac{3}{4}} = \frac{4}{9}$
+
+
+% \Exercise[label={ex:conditional-sum-product-rules}]
+% It is quite often useful to consider the effect of some specific propositions in the context of
+% some general background evidence that remains fixed, rather than in the complete absence
+% of information. The following questions ask you to prove more general versions of the
+% product rule and Bayes rule, with respect to some background evidence $E$:\\
+
+% (a) Prove from first principles (sum and product rules) the conditional version of the general product rule:
+% $$ p(A,B|E) = p(A|B,E)p(B|E)$$
+% (b) Prove the conditional version of Bayes rule:
+% $$ p(A|B,C) =\frac{p(B|A,C)p(A|C)}{p(B|C)}$$
+
+% \Answer[ref={ex:conditional-sum-product-rules}]
+% The basic axiom to use here is the definition of conditional probability:\\
+% (a) We have
+% $$ p(A,B|E) = \frac{p(A,B,E)}{p(E)}$$
+% and
+% $$ p(A|B,E)P(B|E) = \frac{p(A,B,E)}{p(B,E)}\,\frac{P(B,E)}{P(E)} = \frac{p(A,B,E)}{p(E)}$$
+% hence
+% $$ p(A,B|E) = p(A|B,E)p(B|E)$$
+% \\
+% (b) First we write down the dual form of the conditional
+% product rule, simply by switching $A$ and $B$ in the above derivation:
+
+% $$ p(A,B|E) = p(B|A,E)p(A|E)$$
+% Therefore the two right-hand sides are equal:
+% $$ p(B|A,E)p(A|E) = p(A|B,E)p(B|E)$$
+% Dividing by $p(B|E)$ yields
+% $$ p(A|B,E) =\frac{p(B|A,E)P(A|E)}{p(B|E)}$$
+
+\Exercise[label={ex:generalized-sum-rule}] (lesson 2: Probability Theory). 
+Derive the `generalized sum rule',
+    $$p(\A + \B) = p(\A) + p(\B) - p(\A,\B)$$
+from the `elementary sum rule' $p(\A) + p(\bar \A) = 1$ and the product rule. Use the fact that $\A + \B = \overline {\bar \A \bar \B }$ (from Boolean logic). 
+\Answer[ref={ex:generalized-sum-rule}] 
+\[\begin{gathered}
+  p\left( {\A + \B} \right)\mathop  = \limits_{bool} p\left( {\overline {\bar \A \bar \B } } \right)\mathop  = \limits_{sum} 1 - p\left( {\bar \A \bar \B } \right)\mathop = \limits_{prod} 1 - p\left( {\bar \A |\bar \B } \right)p\left( {\bar \B } \right) \hfill \\
+  \mathop  = \limits_{sum} 1 - \left( {1 - p\left( {\A|\bar \B } \right)} \right)\left( {1 - p\left( \B \right)} \right) = p(\B) + \left( {1 - p\left( \B \right)} \right)p\left( {\A|\bar\B } \right) \hfill \\
+  \mathop  = \limits_{prod} p(\B) + \left( {1 - p\left( \B \right)} \right)p\left( {\bar \B |\A} \right)\frac{{p\left( \A \right)}}
+{{p\left( {\bar \B } \right)}}\mathop  = \limits_{sum} p(\B) + p\left( {\bar \B |\A} \right)p\left( \A \right) \hfill \\
+  \mathop  = \limits_{sum} p(\B) + \left( {1 - p\left( {\B|\A} \right)} \right)p\left( \A \right)\mathop  = \limits_{prod} p\left( \A \right) + p(\B) - p\left( {\A,\B} \right) \hfill \\
+\end{gathered}
+\]
+
+If $\A$ and $\B$ can not be true at the same time (we say: $\A$ and $\B$ are \emph{mutually exclusive}), it follows that $p(\A,\B)=0$ and consequently in this case $p(\A+\B) = p(\A) + p(\B)$. 
+
+%\Exercise[label={ex:Bishop's sum rule}] Bishop introduces $p(X)=\sum_Y p(X,Y)$ as the sum rule, whereas we posed the more fundamental sum rule $p(X) + p(\bar X) = 1$.    
+
+\Exercise[label={ex:inhabitants},origin={DM03, ex.2.36}]\footnote{David Mackay, Information Theory, Inference, and Learning algorithms, Cambridge Press, 2003 (accessible at http://www.inference.org.uk/itila/book.html)}. (lesson 2: Probability Theory). The inhabitants of an island tell the
+ truth one third of the time. They lie with  probability  2/3.
+ On an occasion, after one of them made a statement,
+ you ask another `was that statement true?'
+ and he says `yes'. What is the probability that the statement was indeed true?
+
+\Answer[ref={ex:inhabitants}] We use variables $S_1$ and $S_2$ for statements 1 and 2 and shorthand `y',`n',`t' and `f' for `yes', `no', `true' and `false', respectively. The problem statement provides us with the following probabilities,
+\begin{align*}
+p(S_1=\text{`t'})&= 1/3\\
+p(S_1=\text{`f'})&= 1 - p(S_1=\text{`t'})= 2/3\\
+p(S_2=\text{`y'}|S_1=\text{`t'})&= 1/3 \\
+p(S_2=\text{`y'}|S_1=\text{`f'})&= 1-p(S_2=\text{`y'}|S_1=\text{`t'})= 2/3
+\end{align*}
+We are asked to compute $p(S_1=\text{`t'}|S_2=\text{`y'})$. Use Bayes rule,
+\begin{align*}
+p(S_1=\text{`t'}|S_2=\text{`y'}) &= \frac{p(S_1=\text{`t'},S_2=\text{`y'})}{p(S_2=\text{`y'})}\\
+&=\frac{p(S_2=\text{`y'}|S_1=\text{`t'})p(S_1=\text{`t'})}{p(S_2=\text{`y'}|S_1=\text{`t'})p(S_1=\text{`t'})+p(S_2=\text{`y'}|S_1=\text{`f'})p(S_1=\text{`f'})}\\
+&= \frac{\frac{1}{3}\cdot\frac{1}{3}}{\frac{1}{3}\cdot\frac{1}{3}+\frac{2}{3}\cdot\frac{2}{3}} = \frac{1}{5}
+\end{align*}
+
+\Exercise[label={ex:bagcounter},origin={DM03, ex.3.12}]. (lesson 2: Probability Theory).  A bag contains one ball, known to be
+ either white or black. A white ball is put in, the bag is shaken,
+ and a ball is drawn out, which proves to be white. What is now the
+ chance of drawing a white ball? [Notice that
+ the state of the bag, after the operations, is exactly identical to its state before.]
+
+\Answer[ref={ex:bagcounter}] There are two hypotheses: let $H = 0$ mean
+that the original ball in the bag was white and $H = 1$ that is was black.
+Assume the prior probabilities are equal. The data is that when a randomly
+selected ball was drawn from the bag, which contained a white one and
+the unknown one, it turned out to be white. The probability of this result
+according to each hypothesis is:
+$$ P(D|H =0) = 1,\quad P(D|H =1) = 1/2$$
+So by Bayes theorem, the posterior probability of $H$ is
+$$P(H =0|D) = 2/3,\quad P(H =1|D) = 1/3$$
+
+ \Exercise[label={ex:causality}] (lesson 2: Probability Theory).  A dark bag contains five red balls and seven green ones. \\(a) What is the probability of drawing a red ball on the first draw? Balls are not returned to the bag after each draw. \\(b) If you know that on the second draw the ball was a green one, what is now the probability of drawing a red ball on the first draw?
+
+\Answer[ref={ex:causality}]
+(a) $p(S_1=R) = \frac{N_R}{N_R+N_G}= \frac{5}{12}$ \\
+(b) The outcome of the $n$th draw is referred to by variable $S_n$. Use Bayes rule to get 
+\begin{align*}
+p(S_1=\text{R}|S_2=\text{G}) &=\frac{p(S_2=\text{G}|S_1=\text{R})p(S_1=\text{R})}{p(S_2=\text{G}|S_1=\text{R})p(S_1=\text{R})+p(S_2=\text{G}|S_1=\text{G})p(S_1=\text{G})}\\
+&= \frac{\frac{7}{11}\cdot\frac{5}{12}}{\frac{7}{11}\cdot\frac{5}{12}+\frac{6}{11}\cdot\frac{7}{12}} = \frac{5}{11}
+\end{align*}
+
+
+\Exercise[label={ex:conditional-mean}] (lesson 2: Probability Theory).  Consider two jointly distributed variables $x$ and $y$, where $x$ is an input and $y$ is a response variable. As usual, the (joint) expectation is defined as $\Exp[g(x,y)] = \int_x\int_y g(x,y) p(x,y)\d{x}\d{y}$ and the \emph{conditional expectation} as $\Exp[g(y)|x] = \int_y g(y) p(y|x)\d{y}$. \\
+(a) Is $\Exp[y|x]$ a function of $x$ only, of $y$ only or is it a function of both $x$ and $y$?\\
+(b) Let's interpret $\hat y=\Exp[y|x]$ as an estimator for the outcomes $y$.  Prove that for any function $f(x)$ of the input variables,
+$$
+\Exp[yf^T(x)] = \Exp[\hat y f^T(x)]
+$$
+\\
+(c) Prove that the conditional mean estimator $\Exp[y|x]$ minimizes the mean squared error loss function over all regression functions $f(x)$, i.e., prove that
+$$
+\Exp\left[(y-f(x))^2\right] \geq \Exp\left[ (y-\Exp[y|x])^2\right]
+$$
+\\
+(d) Interpret this result.
+
+\Answer[ref={ex:conditional-mean}]
+(a) $\Exp[y|x]$ a function of $x$ only.\\
+(b)
+\begin{align*}
+\Exp[yf^T(x)] &= \int_x \int_y yf^T(x) p(x,y)\d{x}\d{y}\\
+&= \int_x \int_y yf^T(x) \r{p(y|x)}\b{p(x)} \d{x}\d{y}\\
+&= \int_x \left[\int_y y \r{p(y|x)}\d{y}\right] f^T(x) \b{p(x)} \d{x}\\
+&= \int_x \hat y f^T(x) p(x) \d{x}\\
+&= \Exp[\hat y f^T(x)]
+\end{align*}
+(c) If we decompose the error between $y$ and $f(x)$ into
+$$
+y - f(x) = (y-\hat y)+(\hat y - f(x))
+$$
+then the MSE between $y$ and $f(x)$ is
+\begin{align*}
+\Exp[(y-f(x))^T(y-f(x))] &= \Exp[(y-\hat y)^T(y-\hat y)] + \Exp[(\hat y - f(x))^T(\hat y-f(x))] \\
+    &\geq \Exp[(y-\hat y)^T(y-\hat y)]
+\end{align*}
+with equality only if $f(x) = \hat y$.
+
+\Exercise[label={ex:ml-map}] (lesson 3: Bayesian Machine Learning).  (a) Explain shortly the relation between machine learning and Bayes rule.\\
+(b) How are Maximum a Posteriori (MAP) and Maximum Likelihood (ML) estimation related to Bayes rule and machine learning?
+
+\Answer[ref={ex:ml-map}] (a) Machine learning is inference over models (hypotheses, parameters, etc.) from a given data set. Bayes rule makes this statement precise. Let $\theta \in \Theta$ and $D$ represent a model parameter vector and the given data set, respectively. Then, Bayes rule,
+$$
+p(\theta|D) = \frac{p(D|\theta)}{p(D)} p(\theta)
+$$
+relates the information that we have about $\theta$ before we saw the data (i.e., the distribution $p(\theta)$) to what we know after having seen the data, $p(\theta|D)$. \\
+(b) The \emph{Maximum a Posteriori} (MAP) estimate picks a value $\hat\theta$ for which the posterior distribution $p(\theta|D)$ is maximal, i.e.,
+$$ \hat\theta_{MAP} = \arg\max_\theta p(\theta|D)$$
+In a sense, MAP estimation approximates Bayesian learning, since we approximated $p(\theta|D)$ by $\delta(\theta-\hat\theta_{MAP})$. Note that, by Bayes rule, $$\arg\max_\theta p(\theta|D) = \arg\max_\theta p(D|\theta)p(\theta)$$
+If we further assume that prior to seeing the data all values for $\theta$ are equally likely (i.e., $p(\theta)=\text{const.}$), then the MAP estimate reduces to the \emph{Maximum Likelihood} estimate,
+$$ \hat\theta_{ML} = \arg\max_\theta p(D|\theta)$$
+
+
+
+
+%\Exercise[label={ex:m-dim-bernoulli}] Assume you have a data set of independent and identically distributed binary vectors $D =\{x_1,\ldots,x_N\}$, where each $x_n$ is $M$-dimensional.\\
+%(a) Describe a simple statistical model for your
+%data.\\
+%(b) What is the expression for the likelihood of the data given the parameters of your
+%model?\\
+%(c) Write down the equations for how you would estimate the parameters of your model
+%from the data.
+
+
+
+
+
+\Exercise[label={ex:ML-MVG}] (lesson 5: density estimation). 
+
+ We are given an IID data set $D = \{x_1,x_2,\ldots,x_N\}$, where $x_n \in \mc{R}^M$. Let's assume that the data were drawn from a multivariate Gaussian (MVG),
+
+    \begin{align*}
+p(x_n|\theta) &= \N(x_n|\,\mu,\Sigma) \\
+    &= |2 \pi \Sigma|^{-\frac{1}{2}} \exp\left\{-\frac{1}{2}(x_n-\mu)^T
+\Sigma^{-1} (x_n-\mu) \right\}
+\end{align*}
+
+(a) Derive the log-likelihood of the parameters for these data.\\
+
+(b) Derive the maximum likelihood estimates for $\mu$ and $\Sigma$.
+
+
+
+\Answer[ref={ex:ML-MVG}]
+
+See lecture notes (on class homepage).
+
+
+\Exercise[label={ex:ML-Mult}] (lesson 5: density estimation). 
+
+Now we consider IID data $D = \{x_1,x_2,\ldots,x_N\}$ obtained from tossing a $K$-sided die. We use a \emph{binary selection variable}
+$$x_{nk} \equiv \begin{cases} 1 & \text{if $x_n$ lands on $k$th face}\\
+    0 & \text{otherwise}
+\end{cases}
+$$
+with probabilities $p(x_{nk} = 1)=\theta_k$.
+ 
+(a) Write down the probability for the $n$th observation $p(x_n|\theta)$ and derive the log-likelihood $\ell(\theta;D)\equiv \log p(D|\,\theta)$.\\
+
+(b) Derive the maximum likelihood estimate for $\theta$.
+
+
+\Answer[ref={ex:ML-Mult}]
+
+See lecture notes (on class homepage). \\
+
+(a) $p(x_n|\theta) = \prod_k \theta_k^{x_{nk}} \quad \text{subject to} \quad \sum_k \theta_k = 1$.
+
+$$\ell(\theta)  = \sum_k m_k \log \theta_k$$
+where $m_k = \sum_k x_{nk}$.
+
+
+(b) $\hat \theta = \frac{m_k}{N}$, the \emph{sample proportion}.
+
+
+
+\Exercise[label={ex:orangeness}] (lesson 7: Generative Classification). You have a machine that measures property $x$, the `orangeness' of liquids. You wish
+to discriminate between $C_1 = \text{`Fanta'}$ and $C_2 = \text{`Orangina'}$. It is known that
+
+\begin{align*}
+p(x|C_1) &= \begin{cases} 10 & 1.0 \leq x \leq 1.1\\
+    0 & \text{otherwise}
+    \end{cases}\\
+p(x|C_2) &= \begin{cases} 200(x - 1) & 1.0 \leq x \leq 1.1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+The prior probabilities $p(C_1) = 0.6$ and $p(C_2) = 0.4$ are also known from experience.\\
+(a) A `Bayes Classifier' is given by
+$$ \text{Decide $C_1$ if $p(C_1|x)>p(C_2|x)$; otherwise decide $C_2$}$$
+Calculate the optimal Bayes classifier.\\
+(b) The probability of making the wrong decision, given $x$, is
+\begin{equation}
+p(\text{error}|x)= \begin{cases} p(C_1|x) & \text{if we decide $C_2$}\\
+    p(C_2|x) & \text{if we decide $C_1$}
+\end{cases}
+\label{eq:p(error|x)}
+\end{equation}
+Compute the \emph{total} error probability  $p(\text{error})$ for the Bayes classifier in this example.
+
+\Answer[ref={ex:orangeness}]
+(a) We choose $C_1$ if $p(C_1|x)/p(C_2|x) > 1$. This condition can be worked out as
+$$
+\frac{p(C_1|x)}{p(C_2|x)} = \frac{p(x|C_1)p(C_1)}{p(x|C_2)p(C_2)} = \frac{10 \times 0.6}{200(x-1)\times 0.4}>1
+$$
+which evaluates to choosing
+\begin{align*}
+C_1 &\quad \text{ if $1.0\leq x < 1.075$}\\ C_2 &\quad \text{ if $1.075 \leq x \leq 1.1$ }
+\end{align*}
+
+The probability that $x$ falls outside the interval $[1.0,1.1]$ is zero.
+
+
+\medskip
+(b) The total probability of error $p(\text{error})=\int_x p(\text{error}|x)p(x)\d{x}$. We can work this out as
+\begin{align*}
+p(\text{error}) &= \int_x p(\text{error}|x)p(x)\d{x}\\
+&= \int_{1.0}^{1.075} p(C_2|x)p(x)\d{x} + \int_{1.075}^{1.1} p(C_1|x)p(x)\d{x}\\
+&= \int_{1.0}^{1.075} p(x|C_2)p(C_2)\d{x} + \int_{1.075}^{1.1} p(x|C_1)p(C_1)\d{x}\\
+&= \int_{1.0}^{1.075}0.4\cdot 200(x-1)\d{x} + \int_{1.075}^{1.1} 0.6\cdot 10\d{x}\\
+&=80\cdot[x^2/2-x]_{1.0}^{1.075} + 6\cdot[x]_{1.075}^{1.1}\\
+&=0.225 + 0.15\\
+&=0.375
+\end{align*}
+
+
+
+\Exercise[label={ex:discr-gen}] (lesson 7: Generative Classification and lesson 8: Discriminative Classification). Describe shortly in your own words the similarities and differences between the discriminative and generative approach to classification.
+
+
+
+\Exercise[label={ex:logistic-regression}] (Logistic regression). (lesson 8: Discriminative Classification). Given a data set $D=\{(x_1,y_1),\ldots,(x_N,y_N)\}$, where $x_n \in \mathcal{R}^M$ and $y_n \in \{0,1\}$. The probabilistic classification method known as \emph{logistic regression} attempts to model these data as
+$$p(y_n=1|x_n) = \sigma(\theta^T x_n + b)$$
+where $\sigma(x) = 1/(1+e^{-x})$ is the \emph{logistic function}. Let's introduce shorthand notation $\mu_n=\sigma(\theta^T x_n + b)$. So, for every input $x_n$, we have a model output $\mu_n$ and an actual data output $y_n$.\\
+
+(a) Express $p(y_n|x_n)$ as a Bernoulli distribution in terms of $\mu_n$ and $y_n$.\\
+(b) If furthermore is given that the data set is IID, show that the log-likelihood is given by
+$$
+\ell(\theta;D) = \sum_n \left\{y_n \log \mu_n  + (1-y_n)\log(1-\mu_n)\right\}
+$$
+(c) Prove that the derivative of the logistic function is given by
+$$
+\sigma^\prime(\xi) = \sigma(\xi)\cdot\left[1-\sigma(\xi)\right]
+$$
+(d) Show that the derivative of the log-likelihood is
+$$
+\nabla_\theta \ell = \sum_{n=1}^N \left( y_n - \sigma(\theta^T x_n +b)\right)x_n
+$$
+(e) Design a gradient-ascent algorithm for maximizing $\ell(\theta;D)$ with respect to $\theta$.\\
+(f) Interpret this result.
+
+\Answer[ref={ex:logistic-regression}]-\\
+
+(a) $p(y_n|x_n) = p(y_n=1|x_n)^{y_n} p(y_n=0|x_n)^{1-y_n} = \mu_n^{y_n}(1-\mu_n)^{1-y_n}$
+
+(b) The log-likelihood is given by
+\begin{align*} \ell(\theta;D) &= \log p(D|\theta) = \sum_n \log p(y_n|x_n,\theta)\\
+&= \sum_n \left\{y_n \log \mu + (1-y_n)\log(1-\mu_n)\right\}
+\end{align*}
+
+(c) \begin{align*}
+\frac{\d{}}{\d{\xi}}\left( \frac{1}{1+e^{-\xi}}\right) &= \frac{(1+e^{-\xi})\cdot 0 - (-e^{-\xi}\cdot 1)}{(1+e^{-\xi})^2}\\
+&= \frac{e^{-\xi}}{(1+e^{-\xi})^2} = \frac{1}{1+e^{-\xi}}\cdot \frac{e^{-\xi}}{1+e^{-\xi}}\\
+&=\sigma(\xi)\left[ 1-\sigma(\xi)\right]
+\end{align*}
+
+(d)
+\begin{align*}
+\nabla_\theta \ell(\theta) &= \sum_n \r{\left(\frac{y_n}{\mu_n} - \frac{1-y_n}{1-\mu_n} \right)} \cdot \b{\frac{\partial{\mu_n}}{\partial{(\theta^T x_n +b)}}} \cdot \g{\frac{\partial{(\theta^T x_n +b)}}{\partial{\theta}}}\\
+&= \sum_n \r{\frac{y_n - \mu_n}{\mu_n(1-\mu_n)}} \cdot \b{\mu_n(1-\mu_n)} \cdot \g{x_n}\\
+&= \sum_n (y_n - \mu_n)x_n
+\end{align*}
+
+(e)
+$$ \theta^{\r{(t+1)}} = \theta^{\r{(t)}} + \rho \sum_n (y_n - \mu_n^{\r{(t)}})x_n$$
+
+
+
+
+
+%\medskip
+%In the following exercises, the Matrix Inversion Lemma
+%$$(A + XBX^T)^{-1} = A^{-1} - A^{-1}X\left(B^{-1} + X^TA^{-1}X\right)^{-1}X^TA^{-1}$$
+%is a useful tool.
+\medskip
+
+%\Exercise[label={ex:FA-posterior}] In Factor Analysis:
+%$$p(x) = \mathcal{N}(0,I) \qquad p(y|x) = \mathcal{N}(\Lambda x,\Psi )$$
+%Derive the expression for the mean and covariance of $p(x|y)$. Hint: write out the joint
+%distribution $p(x, y)$ and then $p(x|y)$ through Bayes rule.
+%
+%\Exercise[label={ex:PCA-posterior}]
+%In Probabilistic Principal Components Analysis:
+%$$p(x) = \mathcal{N}(0,I) \qquad p(y|x) = \mathcal{N}(\Lambda x,\sigma^2I )$$
+%and the principal components are assumed to be orthonormal: $\Lambda^T\Lambda = I$. Derive the mean
+%and covariance of $p(x|y)$ in the PCA limit, $\sigma^2 \rightarrow 0$.
+
+
+\Exercise[label={ex:3}] (lesson 9: Clustering). 
+ Consider a data set $D=\{x_1,x_2,\dots,x_N\}$ and a MVG generative model for these data. The maximum likelihood estimate (MLE) of the mean value of this MVG distribution is given by
+\begin{equation}\hat \mu = \frac{1}{N}\sum_n x_n \label{eq:mvg-mu} \end{equation}
+
+In the lecture notes on linear generative classification, we derived the following expression for the MLE of the \emph{class-conditional} mean,
+\begin{equation}
+\hat \mu_k = \frac{\sum_n t_{nk} x_n}{\sum_n t_{nk}}
+\label{eq:clas-mu}
+\end{equation}
+
+(a) Explain this formula. What does $t_{nk}$ represent? Relate this formula to the expression for the MLE of the mean for a MVG.\\
+
+We then discussed MLE for a \emph{clustering} problem and derived
+
+\begin{equation}
+\hat \mu_k^{\r{(t)}} = \frac{\sum_n r_n^{k\r{(t)}} x_n}{\sum_n r_n^{k\r{(t)}}}
+\label{eq:clus-mu}
+\end{equation}
+
+(b) Again, explain this latter formula. What does $r_n^k$ represent? Why the superscript $\r{(t)}$?
+
+\medskip
+Let $z_n^k$ be the usual binary selection variable, corresponding to the $k$th cluster.
+
+(c) Express $r_n^{k\r{(t)}}$ as a conditional probability distribution (that involves both $x_n$ and $z_n$).
+
+
+
+\Answer[ref={ex:3}]
+
+(a) For a classification problem, we use $t_{nk}$ as a binary indicator variable, i.e.,
+
+ $$ t_{nk} = \begin{cases} 1 & \text{if $k$th class} \\
+    0 & \text{else}
+    \end{cases}$$
+
+Equation~\ref{eq:clas-mu} computes the sample proportion, just like eq.~\ref{eq:mvg-mu} , but now only for samples from class $k$.\\
+
+(b) $0 \leq r_n^k \leq 1$ is a \emph{soft} class indicator. It is our best estimate of the binary class indicator $t_{nk}$, given the input $x_n$. The superscript $\r{(t)}$ is the iteration index in an iterative update algorithm such as EM; we need this because in clustering we don't have a one-step solution to the maximum likelihood estimation problem.\\
+
+(c) The E-step (in the EM algo) for clustering:
+ $$r_n^{k\r{(t+1)}} = p(z_n^k|x_n,\theta^{\r{(t)}})$$
+
+
+
+
+
+\Exercise[label={ex:6}] (Factor Analysis). (lesson 11: Continuous Latent Variable models). 
+Again we consider an observed data set $D = \{x_1,x_2,\ldots,x_N\}$ where $x_n \in \mc{R}^M$.  This time we assume that the data were generated according to a model $x_n = \Lambda z_n + v_n$ where $z_n \in \mc{R}^K$, $K<M$. The samples $z_n$ are IID drawn from a distribution $\mc{N}(0,I)$ and $v_n \sim \mc{N}(0,\Psi)$. Furthermore, we assume that $z_n$ and $v_n$ are uncorrelated, i.e., $\epsilon[z_nv_n^T]=0$.
+
+\medskip
+(a) Write this model in terms of $p(x_n|z_n)$ and a prior $p(z_n)$.\\
+
+\medskip
+Note that $p(x_n)$ is a Gaussian distribution since products and marginals of Gaussian distributions yield again Gaussian distributions.
+
+(b) Given that $p(x_n)$ is Gaussian, proof that
+$$p(x_n) = \mc{N}(0,\Lambda \Lambda^T +\Psi)$$
+(hint: workout the expectation and variance of $x_n$).
+
+(c) Why is this model not very interesting if the only constraint for $\Psi$ is that it's a symmetric positive definite matrix? What's so interesting about this model if $\Psi$ is constrained to be a diagonal matrix?
+
+\medskip
+In the E-step of an EM-algorithm for estimating $\Psi$, we compute the posterior distribution of hidden factors $z_n$, given the observed data, as
+\begin{align*}
+q_n^{\r{(t+1)}}(z) &= p(z|x_n,\theta^{\r{(t)}}) = \N(z|\,m_n,V)\\
+    V &= (I + \Lambda^T \Psi^{-1} \Lambda)^{-1} \\
+    m_n &= V \Lambda^T \Psi^{-1} x_n
+    \end{align*}
+In the M-step, we then maximize the free energy function w.r.t $\Psi$ and obtain
+\begin{align*}
+\hat \Psi^{\r{(t+1)}} &= \text{diag}\left\{\Lambda^{\r{(t+1)}} V (\Lambda^{\r{(t+1)}})^T + \frac{1}{N} \sum_n (x_n-\Lambda m_n)(x_n-\Lambda m_n)^T \right\}
+\end{align*}
+
+(d) Use the expression for $\hat \Psi^{\r{(t+1)}}$ to explain differences (and similarities) between this model and the linear regression model.
+
+
+
+\Answer[ref={ex:6}]
+
+(a) $$ p(x_n|z_n) = \mc{N}(\Lambda z_n,\Psi), \quad p(z_n)=\mc{N}(0,I)$$\\
+
+(b) \begin{align*}
+\epsilon[x_n] &= \epsilon[\Lambda z_n + v_n] = \Lambda \epsilon[z_n] + \epsilon[v_n] = 0\\
+\var[x_n] &= \epsilon[(x_n-\epsilon[x_n])(x_n-\epsilon[x_n])^T]\\
+    &=\epsilon[(\Lambda z_n + v_n)(\Lambda z_n + v_n)^T]\\
+    &= \Lambda \epsilon[z_nz_n^T]\Lambda^T + \epsilon[v_nv_n^T]\\
+    &=\Lambda\Lambda^T + \Psi
+\end{align*}
+
+(c) Because setting $\Lambda=0$ would result in a `regular' gaussian model; i.o.w. it's no more interesting than any other gaussian model. If $\Psi$ is diagonal, then all correlations between the components in $x$ \emph{must} be absorbed ('explained') by the rank-$K$ matrix $\Lambda \Lambda^T$. This is interesting because $K<M$ and hence this model attempts to achieve dimensionality reduction.\\
+
+(d) Factor Analysis is much like unsupervised linear regression (plus a few constraints on the noise covariance matrix $\Psi$). The MLE for $\Psi$ looks the same for both FA and LR, apart from an extra term $\Lambda V \Lambda^T$ in the FA case. This latter term reflects the uncertainty about the inputs ($z_n$). In FA, our knowledge about the inputs is expressed as the posterior $p(z|x_n,\theta^{\r{(t)}}) = \N(z|\,m_n,V)$. I.o.w., the uncertainty about the inputs is reflected by the covariance matrix $V$ (and it shows up as $\Lambda V \Lambda^T$ in the M-step for the MLE of $\Psi$. In LR, the inputs are exactly known, i.e. $V=0$ and in the MLE expression the term $\Lambda V \Lambda^T$ vanishes. Lastly, since FA contains hidden inputs, we cannot solve MLE in one step, but need to resort to an iterative algorithm (such as EM).
+
+\Exercise[label={ex:7}] (Temporal Models) (Lesson 13: Dynamic latent variable models).
+What is the 1st-order Markov assumption? Derive the joint probability distribution $p(x_{1:T},z_{1:T})$ from transition and observation models ($p(z_t|z_{t-1})$ and $p(x_t|z_t)$). What is a HMM? What is a Kalman Filter? What is a Linear Dynamizal System (LDS)? How does the Kalman Filter relate to the LDS? And to FA? Explain the popularity of Kalman filtering and HMMs? How relates a HMM to a GMM? What's the significance of the $\alpha$ and $\beta$ recursions?
+
+\Answer[ref={ex:7}]
+See slides
+
+\Exercise[label={final}] 
+Work through previous exams!!
+
+
+\end{ExerciseList}
+
+
+\end{document}                           % Must be in document 
+
+
+%
+%\Exercise[label={ex:5}] (EM for Mixture of Bernoulli's).
+%
+%Assume we have two coins. The first coin has a probability of heads ("0") equal to $\mu$ and the
+%second coin has a probability of heads equal to $\nu$. At each trial we choose to toss coin 1 with
+%probability $\lambda$ and coin 2 with probability $1 - \lambda$. Once a coin has been chosen, it is tossed 3 times,
+%producing an observation $x \in \{0,1\}^3$. We are given a set of such observations
+%$D = \{x_1,\ldots,x_N\}$ where each observation $x_n$ is a triplet of coin tosses (of the same coin). We wish to
+%determine the parameters $\theta = (\lambda, \mu, \nu)$ by using the maximum likelihood (ML) principle,
+%$$
+%\hat \theta = \arg\max_\theta p(D|\theta)
+%$$
+%
+%Let $z_n \in \{1,2\}$ be a random variable associated with the observation $x_n$ such that $z_n= 1$ if $x_n$
+%was generated by coin 1 and $z_n=2$ if $x_n$ was generated by coin 2.
+%We define the \emph{complete} data set as $D_c = \{x_1,\ldots,x_N,z_1,\ldots,z_N\}$. As usual, we will use the \emph{indicator variable} notation as follows:
+%
+%$$z_n^k = \begin{cases} 1 & \text{if } z_n=k\\
+%    0 & \text{otherwise}
+%    \end{cases}
+%    $$
+%
+%The variable $0 \leq h_n \leq 3$ holds the number of heads in the $n^{\text{th}}$ toss.
+%
+%\medskip
+%We'll use the EM algorithm, since $z_n$ is not observed. The goal is therefore to first compute the \emph{expected complete-data log-likelihood} $\langle \ell_c(\theta)\rangle$ (the \textbf{E-step}) and then maximize this creature w.r.t. the parameters $\theta$ (the \textbf{M-step}). In this exercise, we'll go through it step by step. It's quite a workout to complete this exercise, but it will be well worth your time.
+%
+%\medskip
+%
+%(a) What is the probability distribution $p(x_n|z_n=1,\mu,h_n)$ for an observation of three tosses with coin 1? And also determine $p(x_n|z_n=2,\nu,h_n)$ for coin 2.\\
+%
+%(b) Write the likelihood $p(x_n|\theta)$ as a mixture of two Bernoulli distributions (in terms of $\mu,\nu,\lambda$ and $h_n$).\\
+%
+%
+%(c) Proof that the \emph{complete-data log-likelihood} $\ell_c(\theta) = \log p(D_c|\theta)$ can be worked out to
+%$$ \sum_{n,k} z_n^k \log \left(p(x_n|z_n=k,\theta)p(z_n=k|\theta)\right)
+%$$
+%
+%
+%To proceed, we take the expectation of the complete-data log-likelihood (the \textbf{E-step}):
+%
+%\begin{align*}
+%\left\langle \ell_c(\theta) \right\rangle
+%&=
+%\left\langle \sum_{n,k} z_n^k \log \left(p(x_n|z_n=k,\theta)p(z_n=k|\theta)\right) \right\rangle \\
+%&= \sum_{n,k} \left\langle z_n^k \right\rangle \log \left(p(x_n|z_n=k,\theta)p(z_n=k|\theta)\right)
+%\end{align*}
+%
+%(d) Why do we maximize the \emph{expected} complete-data log-likelihood $\langle\ell_c(\theta)\rangle$rather than the `regular' complete-data log-likelihood $\ell_c(\theta)$?\\
+%
+%So rather than using the actual value of $z_n^k$, we work with the expected value of $z_n^k$. In the EM algorithm, we take the expectation w.r.t. its posterior distribution $p(z_n^k|x_n,\theta_0)$ (because this is all we know about $z_n^k$), where $\theta_0 = (\lambda_0, \mu_0, \nu_0)$ is an (initial) estimate of the parameters. \\
+%
+%(e) Proof that the expectation $\left\langle z_n^k \right\rangle = \sum z_n^k \cdot p(z_n^k|x_n,\theta_0)$ can be worked out as follows (note: The difficulty lies here in what index we sum over):
+%$$
+%\sum z_n^k p(z_n^k|x_n,\theta_0) = p(z_n=1|x_n,\theta_0)
+%$$
+%
+%Given an observation $x_n$ and , we can compute the posterior distribution $p(z_n^k|x_n,\theta_0)$ for $z_n$.\\
+%
+%(f) Work out $p(z_n=1|x_n,\theta_0)$ using Bayes rule. How is $p(z_n=2|x_n,\theta_0)$ related to $p(z_n=1|x_n,\theta_0)$?\\
+%
+%
+%In the \textbf{M-step}, we will treat the expected value $\left\langle z_n^k \right\rangle$ as a fixed value (let's use shorthand $q_n \equiv \left\langle z_n^k \right\rangle=p(z_n=1|x_n,\theta_0)$). The M-step then comes down to maximizing
+%\begin{equation}
+%\sum_{n,k} q_n \log \left(p(x_n|z_n=k,\theta)p(z_n=k|\lambda)\right)
+%\label{eq:exp-com-ll}
+%\end{equation}
+%relative to the free parameters $\mu,\nu$ and $\lambda$.\\
+%
+%(g) Starting with the result of Eq.~\ref{eq:exp-com-ll}, work out the expected complete-data log-likelihood $\langle\ell_c(\theta)\rangle$ (in terms of its parameters $\mu,\nu$ and $\lambda$).\\
+%
+%(h) Take the derivatives of $\langle\ell_c(\theta)\rangle$ w.r.t. $\mu,\nu$ and $\lambda$; set the derivatives to zero to find the M-step updates for $\mu,\nu$ and $\lambda$.\\
+%
+%(i) Can you now come up with an EM algorithm for this problem?
+%
+%
+%
+%
+%\Answer[ref={ex:5}]
+%
+%\r{NOTE (4-March 2009): Two attentive student found that the answers for this exercise are not entirely correct. I will leave them posted here for you, but you are encouraged to derive the answers with a bit more precision than I did :)} 
+%
+%(a) $$ p(x_n|z_n=1,\mu,n_h) = \mu^{n_h}(1-\mu)^{3-n_h}, \qquad p(x_n|z_n=2,\nu,n_h) = \nu^{n_h}(1-\nu)^{3-n_h}$$
+%
+%(b)
+%\begin{align*}
+%p(x_n|\theta) &= p(x_n,z_n=1|\theta) + p(x_n,z_n=2|\theta)\\
+%    &= p(x_n|z_n=1,\mu)p(z_n=1) + p(x_n|z_n=2,\nu) p(z_n=2)\\
+%    &= \lambda \mu^{h_n}(1-\mu)^{3-h_n} + (1-\lambda)\nu^{h_n}(1-\nu)^{3-h_n}
+%\end{align*}
+%
+%(c)
+%\begin{align*}
+%\ell_c(\theta) &= \log \prod_n p(x_n,z_n|\theta) = \sum_n \log p(x_n,z_n|\theta)\\
+%    &=\sum_n \log \r{\prod_k} p(x_n,\r{z_n=k}|\theta)^{\r{z_n^k}} \quad \text{(important trick!)}\\
+%    &=\sum_n \sum_k z_n^k \log p(x_n,z_n^k|\theta)\\
+%    &=\sum_n \sum_k z_n^k \log \left(p(x_n|z_n=k,\theta)p(z_n=k|\theta)\right)
+%\end{align*}
+%
+%(d) We cannot compute the 'regular' $\ell_c(\theta)$, since $z_n$ is not observed! We can however compute the posterior $p(z_n^k|x_n,\theta_0)$, given an observation $x_n$, and therefore we can also compute the expectation of $z_n^k$ (wrt this posterior). So, instead of working with the true (but unobserved) value of $z_n^k$, we'll have to be content with working with its expected value.\\
+%
+%
+%
+%(e) (important!) You need to sum over the range of values that $z_n^k$ can take on.
+%\begin{align*}
+%\langle z_n^k \rangle_{\theta_0} &= \sum_{z_n^k \in \{0,1\}} z_n^k \cdot p(z_n^k|x_n,\theta_0)\\
+%    &= 0\cdot p(z_n^0|x_n,\theta_0) + 1\cdot p(z_n^1|x_n,\theta_0)\\
+%    &=p(z_n=1|x_n,\theta_0)
+%\end{align*}
+%
+%
+%(f)
+%\begin{align*}
+%p(z_n=1|x_n,\theta_0) &= \frac{p(x_n|z_n=1,\mu_0) p(z_n=1|\lambda_0)}{\sum_k p(x_n|z_n=k,\mu_0) p(z_n=k|\lambda_0)} \\
+%&= \frac{\lambda_0 \mu_0^{n_h}(1-\mu_0)^{3-n_h}}{\lambda_0 \mu_0^{h_n}(1-\mu_0)^{3-h_n} + (1-\lambda_0)\nu_0^{h_n}(1-\nu_0)^{3-h_n}}\\
+%p(z_n=2|x_n,\theta_0) &= 1 - p(z_n=1|x_n,\theta_0)
+%\end{align*}
+%
+%(g)
+%\begin{align*}
+%\langle \ell_c(\theta) \rangle  &= \sum_n \sum_k \r{q_n} \log \left(p(x_n|z_n=k,\theta)p(z_n=k|\theta)\right)\\
+%    &= \sum_n \left[ q_n \log \left(\lambda \mu^{h_n}(1-\mu)^{3-h_n}\right) + (1-q_n)\log\left((1-\lambda)\nu^{h_n}(1-\nu)^{3-h_n}\right)  \right]
+%\end{align*}
+%
+%(h)
+%$$ \frac{\partial \langle \ell_c(\theta) \rangle}{\partial \lambda} = \sum_n q_n \frac{1}{\lambda} - \sum_n(1-q_n)\frac{1}{1-\lambda}=0$$
+%and hence M-step update $\lambda = \frac{1}{N}\sum_n q_n$.
+%
+%The partial derivative wrt $\mu$ is
+%$$ \frac{\partial \langle \ell_c(\theta) \rangle}{\partial \mu} = \sum_n\frac{q_n h_n}{\mu} - \sum_n \frac{q_n(3-h_n)}{1-\mu}$$
+%
+%Set to zero to get M-step update $$\mu = \frac{1}{\sum_n q_n}\sum_n \frac{h_n}{3}q_n$$ Likewise the m-step update for $\nu$ comes out as
+%$$
+%\nu = \frac{1}{\sum_n(1-q_n)}\sum_n \frac{h_n}{3}(1-q_n)
+%$$
+%
+%(i) Combine answers to (f): E-step and (h): M-step
+%(d)(important derivation!)
+%\begin{align*}
+%\ell(\theta;D) &= \sum_n \log p(x_n|\theta) = \sum_n \log \left( \b{\sum_z} p(x_n,\b{z}|\theta)\right) \\
+%   &= \sum_n \log \left( \sum_z \r{q(z)} \frac{p(x_n,z|\theta)}{\r{q(z)}} \right)\\
+%   &\geq \sum_n \sum_z q(z) \log \frac{p(x_n,z|\theta)}{q(z)} \qquad \text{(Jensen)}\\
+%&= \mc{F}(\theta,q)
+%\end{align*}
+%
+%(e)
+%\begin{align*}
+%\arg\max_\theta \mc{F}(\theta,q) &= \arg\max_\theta \sum_{n,z} q(z) \log \frac{p(x_n,z|\theta)}{q(z)} \\
+%   &=\arg\max_\theta \left\{ \sum_{n,z} q(z) \log p(x_n,z|\theta) -   \sum_{n,z} q(z) \log q(z) \right\}\\
+%&= \arg\max_\theta \sum_{n,z} q(z) \log p(x_n,z|\theta)\\
+%&= \arg\max_\theta \ell_c(\theta;D)
+%\end{align*}
+
