@@ -1,7 +1,7 @@
 ## Adaptive Information Processing
 
-**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox**
-Eindhoven University of Technology, Dept. of Electrical Engineering
+**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox** .    
+Eindhoven University of Technology, Dept. of Electrical Engineering .    
 Corr. to <bert.de.vries@tue.nl>
 
 This site contains materials for course [5SSB0 (Adaptive Information Processing)](http://bertdv.github.io/teaching/AIP-5SSB0/) at [TU/e](http://tue.nl).
