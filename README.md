@@ -1,10 +1,10 @@
 ## Adaptive Information Processing
 
-**Bert de Vries**, **Tjalling Tjalkens** and **Marco Cox** .    
+**Bert de Vries** and **Tjalling Tjalkens**.    
 Eindhoven University of Technology, Dept. of Electrical Engineering .    
 Corr. to <bert.de.vries@tue.nl>
 
-This site contains materials for course [5SSB0 (Adaptive Information Processing)](http://bertdv.github.io/teaching/AIP-5SSB0/) at [TU/e](http://tue.nl).
+This site contains materials for course [5SSB0 (Adaptive Information Processing)](http://5SSB0.nl) at [TU/e](http://tue.nl).
 
 
 ### Read-only versions
@@ -24,10 +24,12 @@ You can view the lecture notes through the links below:
 - [9 - Clustering with Gaussian Mixture Models](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/09_Clustering-with-Gaussian-Mixture-Models.ipynb)
 - [10- The EM Algorithm](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/10_The-General-EM-Algorithm.ipynb)
 - [11- Continuous Latent Variable Models - PCA and FA](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/11_Continuous-Latent-Variable-Models-PCA-and-FA.ipynb)
-- [12- Factor Graphs and Message Passing Algorithms](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/12_Factor-Graphs-and-Message-Passing-Algorithms.ipynb)
-- [13- Dynamic Latent Variable Models](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/13_Dynamic-Latent-Variable-Models.ipynb)
-- [14- EM as a Message Passing Algorithm](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/14_EM-as-Message-Passing.ipynb) (this lesson not at exam!)
+- [12- Dynamic Latent Variable Models](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/12_Dynamic-Latent-Variable-Models.ipynb)
+- [13- Factor Graphs and Message Passing Algorithms](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/13_Factor-Graphs-and-Message-Passing-Algorithms.ipynb)
 
+<!---
+- [14- EM as a Message Passing Algorithm](http://nbviewer.ipython.org/github/bertdv/AIP-5SSB0/blob/master/lessons/notebooks/14_EM-as-Message-Passing.ipynb) (this lesson not at exam!)
+--->
 
 ### Opening the lecture notes locally
 
