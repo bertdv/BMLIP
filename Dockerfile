@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Joris Kraak <me@joriskraak.nl>
 
 ENV DEBIAN_FRONTEND noninteractive
