@@ -15,7 +15,7 @@ ipynb_files = []
 # Only include ipynb files which are not checkpoints
 ipynb_matcher = re.compile("(?<!checkpoint.)ipynb$")
 
-for (directory, _, files) in os.walk('lessons'):
+for (directory, _, files) in os.walk('lessons/notebooks'):
     for filename in files:
         filepath = Path(directory, filename)
         filepath_str = str(filepath)
