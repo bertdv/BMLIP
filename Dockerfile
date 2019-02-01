@@ -6,7 +6,7 @@ ENV LANG en_US.UTF-8
 ENV PATH /opt/node/bin:/opt/julia/bin:$PATH
 ENV PYTHON /usr/bin/python3
 
-ADD ["https://nodejs.org/dist/v7.5.0/node-v7.5.0-linux-x64.tar.xz", "/tmp/"]
+ADD ["https://nodejs.org/dist/v10.15.1/node-v10.15.1-linux-x64.tar.xz", "/tmp/"]
 
 ADD ["https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.2-linux-x86_64.tar.gz", "/tmp/"]
 
@@ -40,7 +40,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/ && \
     mkdir -p /opt/node && \
-    tar --strip-components 1 -xf /tmp/node-v7.5.0-linux-x64.tar.xz -C /opt/node && \
+    tar --strip-components 1 -xf /tmp/node-v10.15.1-linux-x64.tar.xz -C /opt/node && \
     npm install -g phantomjs-prebuilt && \
     cd /aip-5ssb0-bundler && \
     npm install toc
