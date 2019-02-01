@@ -42,7 +42,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
     rm -rf /var/lib/apt/lists/ && \
     mkdir -p /opt/node && \
     tar --strip-components 1 -xf /tmp/node-v10.15.1-linux-x64.tar.xz -C /opt/node && \
-    npm install -g phantomjs-prebuilt && \
+    npm install -g phantomjs-prebuilt --unsafe-perm && \
     cd /aip-5ssb0-bundler && \
     npm install toc
 
