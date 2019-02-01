@@ -36,7 +36,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
     mkdir -p /opt/julia && \
     tar --strip-components 1 -zxf /tmp/julia-1.1.0-linux-x86_64.tar.gz -C /opt/julia && \
     pip3 install cython jupyter PyPDF2 reportlab && \
-    julia -e 'using Pkg; Pkg.add("CSV"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("HCubature"); Pkg.add("IJulia"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("SpecialFunctions")' && \
+    julia -e 'using Pkg; Pkg.add("CSV"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("ForneyLab"); Pkg.add("HCubature"); Pkg.add("IJulia"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("SpecialFunctions")' && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/ && \
@@ -45,9 +45,6 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
     npm install -g phantomjs-prebuilt && \
     cd /aip-5ssb0-bundler && \
     npm install toc
-
-ADD ["ForneyLab.jl", "/root/.julia/v0.6/ForneyLab"]
-RUN julia -e 'Pkg.resolve()'
 
 WORKDIR /aip-5ssb0-bundler/
 
