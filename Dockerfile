@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Joris Kraak <me@joriskraak.nl>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -6,9 +6,9 @@ ENV LANG en_US.UTF-8
 ENV PATH /opt/node/bin:/opt/julia/bin:$PATH
 ENV PYTHON /usr/bin/python3
 
-ADD ["https://nodejs.org/dist/v7.5.0/node-v7.5.0-linux-x64.tar.xz", "/tmp/"]
+ADD ["https://nodejs.org/dist/v10.15.1/node-v10.15.1-linux-x64.tar.xz", "/tmp/"]
 
-ADD ["https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.2-linux-x86_64.tar.gz", "/tmp/"]
+ADD ["https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-1.1.0-linux-x86_64.tar.gz", "/tmp/"]
 
 ADD ["bundler/", "/aip-5ssb0-bundler/"]
 ADD ["styles/", "/aip-5ssb0-bundler/styles"]
@@ -19,6 +19,7 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
     locale-gen en_US.UTF-8 && \
     apt-get install -y build-essential \
                        curl \
+                       graphviz \
                        libjpeg-dev \
                        libnettle6 \
                        libzmq3-dev \
@@ -33,20 +34,17 @@ RUN mkdir -p /aip-5ssb0-bundler/lessons /aip-5ssb0-bundler/output && \
                        subversion \
                        zlib1g-dev && \
     mkdir -p /opt/julia && \
-    tar --strip-components 1 -zxf /tmp/julia-0.6.2-linux-x86_64.tar.gz -C /opt/julia && \
+    tar --strip-components 1 -zxf /tmp/julia-1.1.0-linux-x86_64.tar.gz -C /opt/julia && \
     pip3 install cython jupyter PyPDF2 reportlab && \
-    julia -e 'Pkg.add("Cubature"); Pkg.add("CSV"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("IJulia")' && \
+    julia -e 'using Pkg; Pkg.add("CSV"); Pkg.add("DataFrames"); Pkg.add("Distributions"); Pkg.add("ForneyLab"); Pkg.add("HCubature"); Pkg.add("IJulia"); Pkg.add("Interact"); Pkg.add("Optim"); Pkg.add("PyPlot"); Pkg.add("Reactive"); Pkg.add("SpecialFunctions")' && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/ && \
     mkdir -p /opt/node && \
-    tar --strip-components 1 -xf /tmp/node-v7.5.0-linux-x64.tar.xz -C /opt/node && \
-    npm install -g phantomjs-prebuilt && \
+    tar --strip-components 1 -xf /tmp/node-v10.15.1-linux-x64.tar.xz -C /opt/node && \
+    npm install -g phantomjs-prebuilt --unsafe-perm && \
     cd /aip-5ssb0-bundler && \
     npm install toc
-
-ADD ["ForneyLab.jl", "/root/.julia/v0.6/ForneyLab"]
-RUN julia -e 'Pkg.resolve()'
 
 WORKDIR /aip-5ssb0-bundler/
 

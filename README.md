@@ -75,16 +75,6 @@ You can now open the lecture notes by going to the `Jupyter` tab (press the refr
 
 ### Creating a PDF bundle of all lessons
 
-This procedure will only be able to generate the PDF bundle for all lessons if
-ForneyLab is available as it is used for the later chapters. This is not
-publicly available software, so the functionality is limited for those who do
-not have access to it.
-
-Get ForneyLab.jl. Either clone it in the root of the project or modify the path
-in the Dockerfile to point at your own installation. If you do not have access
-to it, but do want to generate a PDF of the remaining lessons, just create an
-empty `ForneyLab.jl` directory.
-
 Install Docker from https://www.docker.com.
 
 Finally from the root directory of the project issue
