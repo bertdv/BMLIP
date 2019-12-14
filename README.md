@@ -26,13 +26,13 @@ You can view the lecture notes through the links below:
 - [10- Dynamic Models](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Dynamic-Models.ipynb)
 - [11- Intelligent Agents and Active Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Intelligent-Agents-and-Active-Inference.ipynb)
 - 12- Minicourse Probabilistic Programming
-  - [Introduction](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_1.ipynb)
-  - [Turing](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_1_Turing.ipynb)  
-  - [ForneyLab](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_1_ForneyLab.ipynb) 
-  - [Sampling](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_2_Sampling.ipynb) 
-  - [Variational Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_2_variational.ipynb) 
-  - [Kalman Filtering](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_3.ipynb) 
-  - [Model Assessment](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_4.ipynb) 
+  - [Introduction](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming-1.ipynb)
+  - [Turing](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming-1-Turing.ipynb)  
+  - [ForneyLab](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming-1-ForneyLab.ipynb) 
+  - [Sampling](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming-2-sampling.ipynb) 
+  - [Variational Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming-2-variational.ipynb) 
+  - [Kalman Filtering](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming-3.ipynb) 
+  - [Model Assessment](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming-4.ipynb) 
 - [13- Bonus lecture: What is Life?](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/What-is-Life.ipynb)
 
 ### Opening the lecture notes locally
