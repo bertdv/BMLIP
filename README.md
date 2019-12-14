@@ -13,21 +13,27 @@ This site contains materials for course [5SSD0 (Bayesian Machine Learning and In
 
 You can view the lecture notes through the links below:
 
-
 - [0 - Course Outline and Administrative Issues](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Course-Outline.ipynb)
 - [1 - Machine Learning Overview](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Machine-Learning-Overview.ipynb)
 - [2 - Probability Theory Review](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probability-Review.ipynb)
 - [3 - Bayesian Machine Learning](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Bayesian-Machine-Learning.ipynb)
-- [4 - Working with Gaussians and Multinomials](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Working-with-Gaussians.ipynb)
-- [5 - Simple Density Estimation](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Density-Estimation.ipynb)
+- [4 - Gaussian and Multinomial Distributions](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Gaussian-and-Multinomial-Distributions.ipynb)
+- [5 - Density Estimation](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Density-Estimation.ipynb)
 - [6 - Regression](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Regression.ipynb)
 - [7 - Classification](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Classification.ipynb)
-- [9 - Latent Variable Models and Variational Bayes](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Latent-Variable-Models-and-VB.ipynb)
-- [10- Probabilistic Programming](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming.ipynb)
-- [11- Dynamic Models](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Dynamic-Models.ipynb)
-- [12- Intelligent Agents and Active Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Intelligent-Agents-and-Active-Inference.ipynb)
-- [13- Applications](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Applications.ipynb)
-- [14- What is Life?](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/What-if-Life.ipynb)
+- [8 - Latent Variable Models and Variational Bayes](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Latent-Variable-Models-and-VB.ipynb)
+- [9 - Factor Graphs](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Factor-Graphs.ipynb)
+- [10- Dynamic Models](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Dynamic-Models.ipynb)
+- [11- Intelligent Agents and Active Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Intelligent-Agents-and-Active-Inference.ipynb)
+- 12- Minicourse Probabilistic Programming
+  - [Introduction](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_1.ipynb)
+  - [Turing](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_1_Turing.ipynb)  
+  - [ForneyLab](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_1_ForneyLab.ipynb) 
+  - [Sampling](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_2_Sampling.ipynb) 
+  - [Variational Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_2_variational.ipynb) 
+  - [Kalman Filtering](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_3.ipynb) 
+  - [Model Assessment](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Probabilistic-Programming_4.ipynb) 
+- [13- Bonus lecture: What is Life?](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/What-is-Life.ipynb)
 
 ### Opening the lecture notes locally
 
