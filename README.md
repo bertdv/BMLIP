@@ -4,7 +4,7 @@
 Eindhoven University of Technology, Dept. of Electrical Engineering        
 Corr. to <bert.de.vries@tue.nl>
 
-This site contains materials for course [5SSD0 (Bayesian Machine Learning and Information Processing)](https://github.com/bertdv/BMLIP) at [TU/e](http://tue.nl).
+This site contains materials for course [5SSD0 (Bayesian Machine Learning and Information Processing)](http://bmlip.nl) at [TU/e](http://tue.nl).
 
 
 ### Teaching assistants
@@ -12,9 +12,7 @@ This site contains materials for course [5SSD0 (Bayesian Machine Learning and In
 
 ### Read-only versions of the lecture notes
 
-You can view the lecture notes through the links below:
-
-#### <span style="color:ref">NOTE: ALL MATERIALS BELOW ARE CURRENTLY UNDER CONSTRUCTION</span>
+You can view the lecture notes through the links below or at the [course website](http://bmlip.nl):
 
 #### Fundamentals
 
@@ -56,45 +54,11 @@ You can view the lecture notes through the links below:
 - [18- What is Life?](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/What-is-Life.ipynb)
 
 
-### Exercises 
-
-In order to prepare for the exam, it is advised to review the following exercises
+#### Exercises 
 
 - [Exercises (without solutions)](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Exercises.ipynb)
 
 
-### Opening the lecture notes locally
-
-In order to open the lecture notes in [IJulia](https://github.com/JuliaLang/IJulia.jl), download the .ipynb files to your computer and start a [Jupyter](https://jupyter.org/) notebook by
-
-```
-$ jupyter notebook
-```
-
-You will now get a new page in your browser with a list of available notebooks. Alternatively, if you don't have Julia/Jupyter installed on your system, you can use [JuliaBox](https://www.juliabox.com/) to run the notebooks (see exact instructions below).
-
-To run the interactive code examples in the lecture nodes, the following Julia packages are required: `Cubature`, `DataFrames`, `Distributions`, `Interact`, `PyPlot`, `Optim`. To install the required packages, execute:
-
-```jl
-map(Pkg.add, ["Cubature", "DataFrames", "CSV", "Distributions", "Interact", "PyPlot", "Optim", "SpecialFunctions"])
-```
-
-### Creating a PDF bundle of all lessons
-
-Install Docker from https://www.docker.com.
-
-Finally from the root directory of the project issue
-
-```sh
-$ docker build -t BMLIP-bundler .
-$ docker run --rm \
-             --volume ${PWD}/lessons:/BMLIP-bundler/lessons \
-             --volume ${PWD}/output:/BMLIP-bundler/output \
-             BMLIP-bundler
-```
-
-to obtain a `bundle.pdf` file containing all lessons in the `output` directory.
-
-#### License
+## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Bayesian Machine Learning and Information Processing</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Bert de Vries</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
