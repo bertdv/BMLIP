@@ -38,13 +38,13 @@ You can view the lecture notes through the links below or at the [course website
 - 13- Linear Regression & Classification    
   - [with Variational Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-1-variational.ipynb)
   - [with Monte Carlo Sampling](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-1-sampling.ipynb)  
-- 14- Gaussian Mixture Model    
+- 14- Gaussian Mixture Models    
   - [with Variational Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-2-variational.ipynb)       
   - [with Monte Carlo Sampling](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-2-sampling.ipynb)
-- 15- Hidden Markov Model    
+- 15- Hidden Markov Models    
   - [with Variational Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-3-variational.ipynb)       
   - [with Monte Carlo Sampling](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-3-sampling.ipynb)  
-- 16- Kalman/Particle Filter     
+- 16- Linear Gaussian Dynamical Systems
   - [with Variational Inference](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-4-variational.ipynb)
   - [with Monte Carlo sampling](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/probprog/Probabilistic-Programming-4-sampling.ipynb)
 
