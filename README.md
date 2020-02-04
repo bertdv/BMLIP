@@ -1,5 +1,6 @@
 ## Bayesian Machine Learning and Information Processing
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bertdv/BMLIP/master)
+
 [Bert de Vries](http://bertdv.nl) and [Wouter Kouw](https://biaslab.github.io/member/wouter/)                     
 Eindhoven University of Technology, Dept. of Electrical Engineering        
 Corr. to <bert.de.vries@tue.nl>
