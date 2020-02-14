@@ -56,7 +56,7 @@ You can view the lecture notes through the links below or at the [course website
 
 #### Exercises
 
-- [Exercises (without solutions)](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/notebooks/Exercises.ipynb)
+- [Exercises (without solutions)](http://nbviewer.ipython.org/github/bertdv/BMLIP/blob/master/lessons/exercises/Exercises.ipynb)
 
 
 ## License
