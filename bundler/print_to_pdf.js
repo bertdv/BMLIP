@@ -2,6 +2,7 @@ var fs = require('fs');
 var system = require('system');
 var toc = require('toc');
 var webpage = require('webpage');
+var MathJax = require('mathjax');
 var page = webpage.create();
 
 var uri = system.args[1];
@@ -50,7 +51,7 @@ capture(page, 'bundle/bundle_with_toc.html', function(error) {
     console.error('Error', error);
     phantom.exit(1);
   } else {
-    page.render('output/AIP-5SSB0.pdf', { format: 'pdf' });
+    page.render('output/BMLIP-5SSD0.pdf', { format: 'pdf' });
     phantom.exit(0);
   }
 });
