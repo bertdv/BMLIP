@@ -1,0 +1,31 @@
+This file contains instructions for generating a PDF of all course notebooks. Be aware that this is a __very__ rough set of scripts and contains multiple errors. Run at your own risk
+(If you're a student reading this because you consider generating your own PDF, don't. Let your instructors deal with this and pick up the latest copy from biaslab.github.io)
+
+Step 1:
+Install Docker
+
+Step 2:
+Clean out the "probprog" course of all notebooks. They contain incomplete code for exercises which mean they crash nbconvert. Be careful to leave behind the workspace to allow the course notebooks access.
+
+Step 3:
+Clean out the "misc" directory. Stuff in here crashes nbconvert for different reasons and is not part of the curriculum
+
+Step 4:
+Build the docker container. Stand in the top directory of the course (BMLIP) and run
+
+"docker build -f Dockerfile.pdf_generator -t bundler ."
+
+This command tells docker to create an image as specified in Dockerfile.pdf_generator. You might get errors at this point related to nodejs not being available. This is an issue on their end unfortunately. If this happens, rerun the command.
+
+Step 5:
+Run the container. Once the build completes, run the following command
+
+docker run --rm \                                                                                        
+--volume ${PWD}/lessons:/bundler/lessons \                                                                                  
+--volume ${PWD}/output:/bundler/output \                                                                                    
+bundler        
+
+This command runs the necessary scripts to generate the PDF file. It loops through all notebooks and runs them to generate output. Then all of them are converted to html using nbconvert. Finally the html files are stitched together with a Table of Contents, a frontpage and some additional formatting.
+
+Running this command will produce several errors, including the script crashing instead of completing. You may even end up with a hanging image that takes up space on your machine. Fear not, for if the task is failed succesfully, you should have a PDF in BMLIP/output
+
