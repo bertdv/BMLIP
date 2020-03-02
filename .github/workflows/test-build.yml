@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ubuntu-latest, ubuntu-18.04, macos-latest, windows-latest]
+        platform: [windows-latest, ubuntu-latest, ubuntu-18.04, macos-latest]
 
     runs-on: ${{ matrix.platform }}
 
@@ -23,9 +23,17 @@ jobs:
     # Install Jupyter with Julia kernel
     - name: Setup Miniconda
       uses: goanpeca/setup-miniconda@v1.0.2
+      with:
+        miniconda-version: 'latest'
 
     - name: Setup Jupyter
       run: conda install -c conda-forge notebook
 
     - name: Setup IJulia
       run: julia -e 'using Pkg; Pkg.add("IJulia")'
+
+    # Run lesson notebooks
+    - name: Test notebook 00
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb
+    - name: Test notebook 01
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/01-Machine-Learning-Overview.ipynb
