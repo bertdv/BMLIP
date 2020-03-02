@@ -34,6 +34,7 @@ jobs:
       run: |
         conda install -c anaconda jupyter
         conda install -c conda-forge matplotlib
+        conda install -c anaconda graphviz 
         conda list
 
     # Install Julia
