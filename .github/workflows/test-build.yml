@@ -27,13 +27,13 @@ jobs:
       with:
         miniconda-version: 'latest'
         python-version: 3.7
-    - shell: bash -l {0}
-      run: conda list
 
     # Install Jupyter
     - name: Setup Jupyter
       shell: bash -l {0}
-      run: conda install -c anaconda jupyter
+      run: |
+        conda install -c anaconda jupyter
+        conda list
 
     # Install Julia
     - name: Setup Julia environment
@@ -50,6 +50,28 @@ jobs:
     # Run lesson notebooks
     - name: Test notebook 00
       shell: bash -l {0}
-      run: |
-        cd lessons/notebooks
-        jupyter nbconvert --to notebook --inplace --execute 00-Course-Outline-and-Admin-Issues.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb
+
+    - name: Test notebook 01
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/01-Machine-Learning-Overview.ipynb
+
+    - name: Test notebook 02
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/02-Probability-Theory-Review.ipynb
+
+    - name: Test notebook 03
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/03-Bayesian-Machine-Learning.ipynb
+
+    - name: Test notebook 04
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/04-The-Gaussian-Distribution.ipynb
+
+    - name: Test notebook 05
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/05-The-Multinomial-Distribution.ipynb
+
+    - name: Test notebook 06
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/06-Regression.ipynb
