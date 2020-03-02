@@ -27,13 +27,17 @@ jobs:
       uses: goanpeca/setup-miniconda@v1.0.2
       with:
         miniconda-version: 'latest'
+      run: |
+        conda update conda
+        conda create -n bmlip python=3.7 anaconda
+        source activate bmlip
 
     - name: Setup Jupyter
       run: |
-        conda update -n base -c defaults conda
+        conda list
+        conda install -c anaconda jupyter
         conda install -c conda-forge notebook
         conda install -c conda-forge jupyterlab
-        conda info
         conda list
 
     - name: Setup IJulia
