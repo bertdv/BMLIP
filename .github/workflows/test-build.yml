@@ -27,7 +27,7 @@ jobs:
       with:
         miniconda-version: 'latest'
         activate-environment: bmlip-env
-        environment-file: BMLIP/environment.yml
+        environment-file: environment.yml
         python-version: 3.7
     - shell: bash -l {0}
       run: |
@@ -55,5 +55,5 @@ jobs:
     - name: Test notebook 00
       shell: bash -l {0}
       run: |
-        cd BMLIP/lessons/notebooks
+        cd lessons/notebooks
         jupyter nbconvert --to notebook --inplace --execute 00-Course-Outline-and-Admin-Issues.ipynb
