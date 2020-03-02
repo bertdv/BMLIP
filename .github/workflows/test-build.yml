@@ -33,7 +33,7 @@ jobs:
       run: |
         conda update conda
         conda create -n bmlip python=3.7 anaconda
-        source activate bmlip
+        conda activate bmlip
         conda list
         conda install -c anaconda jupyter
         conda install -c conda-forge notebook
