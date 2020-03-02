@@ -35,13 +35,12 @@ jobs:
         conda install -c conda-forge notebook
 
     - name: Setup IJulia
-      run: julia -e 'using Pkg; Pkg.add("IJulia")'
+      run: julia -e 'using Pkg; Pkg.add("IJulia"); using IJulia; installkernel("julia")'
 
     # Run lesson notebooks
     - name: Test notebook 00
       shell: bash -l {0}
       run: |
-        pwd
         ls
         jupyter nbconvert --to notebook --inplace --execute "./lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb"
     # - name: Test notebook 01
