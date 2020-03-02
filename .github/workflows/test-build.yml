@@ -18,8 +18,8 @@ jobs:
     # Clone repo
     - name: Checkout BMLIP repo
       uses: actions/checkout@v2
-        with:
-          ref: master
+      with:
+        ref: master
 
     # Install Miniconda environment
     - name: Setup Miniconda
@@ -61,6 +61,7 @@ jobs:
 
     # Run lesson notebooks
     - name: Test notebook 00
+      shell: bash -l {0}
       run: |
         cd BMLIP/lessons/notebooks
         jupyter nbconvert --to notebook --inplace --execute 00-Course-Outline-and-Admin-Issues.ipynb
