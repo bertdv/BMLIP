@@ -40,9 +40,4 @@ jobs:
     # Run lesson notebooks
     - name: Test notebook 00
       shell: bash -l {0}
-      run: |
-        ls
-        jupyter nbconvert --to notebook --inplace --execute "./lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb"
-    # - name: Test notebook 01
-    #   shell: bash -l {0}
-    #   run: jupyter nbconvert --to notebook --inplace --execute lessons/notebooks/01-Machine-Learning-Overview.ipynb
+      run: ls
