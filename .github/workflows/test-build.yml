@@ -32,12 +32,21 @@ jobs:
       run: |
         conda install -c conda-forge jupyterlab
         conda install -c conda-forge notebook
+        conda update -n base -c defaults conda
         conda info
         conda list
 
     - name: Setup IJulia
       run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.status(); using IJulia; installkernel("julia")'
 
+    # Clone repo
+    - name: Clone BMLIP repo
+      run: |
+        git clone https://github.com/bertdv/BMLIP.git
+        cd BMLIP
+
     # Run lesson notebooks
     - name: Test notebook 00
-      run: ls -a
+      run: |
+        ls -a
+        jupyter nbconvert --to notebook --inplace --execute "./lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb"
