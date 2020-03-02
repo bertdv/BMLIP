@@ -15,6 +15,38 @@ jobs:
 
     steps:
 
+    # Clone repo
+    - name: Checkout BMLIP repo
+      uses: actions/checkout@v2
+        with:
+          ref: master
+
+    # Install Miniconda environment
+    - name: Setup Miniconda
+      uses: goanpeca/setup-miniconda@v1.0.2
+      with:
+        miniconda-version: 'latest'
+        activate-environment: bmlip-env
+        environment-file: BMLIP/.github/workflows/environment.yml
+        python-version: 3.7
+    - shell: bash -l {0}
+      run: |
+        conda info
+        conda list
+
+    # Install Jupyter
+    - name: Setup Jupyter
+      shell: bash -l {0}
+      run: |
+      #  conda list
+        # conda create -n bmlip python=3.7 anaconda
+        conda install -c anaconda jupyter
+      #  conda activate bmlip
+      #  conda install -c anaconda jupyter
+      #  conda install -c conda-forge notebook
+      #  conda install -c conda-forge jupyterlab
+      #  conda list
+
     # Install Julia
     - name: Setup Julia environment
       uses: julia-actions/setup-julia@v1.1.0
@@ -23,33 +55,12 @@ jobs:
         arch: x64
         show-versioninfo: true
 
-    # Install Jupyter with Julia kernel
-    - name: Setup Miniconda
-      uses: goanpeca/setup-miniconda@v1.0.2
-      with:
-        miniconda-version: 'latest'
-
-    - name: Setup Jupyter
-      run: |
-        conda update conda
-        conda create -n bmlip python=3.7 anaconda
-        conda activate bmlip
-        conda list
-        conda install -c anaconda jupyter
-        conda install -c conda-forge notebook
-        conda install -c conda-forge jupyterlab
-        conda list
-
+    # Add IJulia kernel to Jupyter
     - name: Setup IJulia
       run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.status(); using IJulia; installkernel("julia")'
-
-    # Clone repo
-    - name: Clone BMLIP repo
-      run: |
-        git clone https://github.com/bertdv/BMLIP.git
-        cd BMLIP/lessons/notebooks
 
     # Run lesson notebooks
     - name: Test notebook 00
       run: |
+        cd BMLIP/lessons/notebooks
         jupyter nbconvert --to notebook --inplace --execute 00-Course-Outline-and-Admin-Issues.ipynb
