@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    timeout-minutes: 20
+    timeout-minutes: 60
 
     strategy:
       matrix:
@@ -29,11 +29,11 @@ jobs:
         python-version: 3.7
 
     # Install Python dependencies
-    - name: Setup Jupyter
+    - name: Install Python dependencies
       shell: bash -l {0}
       run: |
         conda install -c anaconda jupyter
-        conda install -c conda-forge matplotlib 
+        conda install -c conda-forge matplotlib
         conda list
 
     # Install Julia
@@ -45,7 +45,7 @@ jobs:
         show-versioninfo: true
 
     # Add IJulia kernel to Jupyter
-    - name: Setup IJulia
+    - name: Install IJulia kernel
       run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.status(); using IJulia; installkernel("julia")'
 
     # Run lesson notebooks
@@ -76,3 +76,59 @@ jobs:
     - name: Test notebook 06
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/06-Regression.ipynb
+
+    - name: Test notebook 07
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/07-Generative-Classification.ipynb
+
+    - name: Test notebook 08
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/08-Discriminative-Classification.ipynb
+
+    - name: Test notebook 09
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/09-Latent-Variable-Models-and-VB.ipynb
+
+    - name: Test notebook 10
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/10-Factor-Graphs.ipynb
+
+    - name: Test notebook 11
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/11-Dynamic-Models.ipynb
+
+    - name: Test notebook 12
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/12-Intelligent-Agents-and-Active-Inference.ipynb
+
+    # - name: Test notebook PP-1-variational
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-1-variational.ipynb
+    #
+    # - name: Test notebook PP-1-sampling
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-1-sampling.ipynb
+    #
+    # - name: Test notebook PP-2-variational
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-2-variational.ipynb
+    #
+    # - name: Test notebook PP-2-sampling
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-2-sampling.ipynb
+    #
+    # - name: Test notebook PP-3-variational
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-3-variational.ipynb
+    #
+    # - name: Test notebook PP-3-sampling
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-3-sampling.ipynb
+    #
+    # - name: Test notebook PP-4-variational
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-4-variational.ipynb
+    #
+    # - name: Test notebook PP-4-sampling
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-4-sampling.ipynb
