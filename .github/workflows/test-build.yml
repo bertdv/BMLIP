@@ -27,7 +27,7 @@ jobs:
       with:
         miniconda-version: 'latest'
         activate-environment: bmlip-env
-        environment-file: BMLIP/.github/workflows/environment.yml
+        environment-file: BMLIP/environment.yml
         python-version: 3.7
     - shell: bash -l {0}
       run: |

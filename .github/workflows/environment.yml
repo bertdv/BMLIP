@@ -1,3 +1,0 @@
-name: bmlip-env
-dependencies:
-  - jupyter >= 1.0
