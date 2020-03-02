@@ -37,15 +37,7 @@ jobs:
     # Install Jupyter
     - name: Setup Jupyter
       shell: bash -l {0}
-      run: |
-      #  conda list
-        # conda create -n bmlip python=3.7 anaconda
-        conda install -c anaconda jupyter
-      #  conda activate bmlip
-      #  conda install -c anaconda jupyter
-      #  conda install -c conda-forge notebook
-      #  conda install -c conda-forge jupyterlab
-      #  conda list
+      run: conda install -c anaconda jupyter
 
     # Install Julia
     - name: Setup Julia environment
