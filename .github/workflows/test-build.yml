@@ -34,7 +34,10 @@ jobs:
         conda install -c anaconda jupyter
         conda install -c conda-forge matplotlib
         conda install -c anaconda graphviz
+        conda install -c anaconda python-graphviz 
         conda list
+        !set PATH=PATH;C:\Users\runneradmin\Library\bin\graphviz\
+        dot
 
     # Install Julia
     - name: Setup Julia environment
