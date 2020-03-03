@@ -46,10 +46,8 @@ jobs:
 
     # Add IJulia kernel to Jupyter
     - name: Install IJulia kernel
-      run: |
-        git clone https://github.com/JuliaLang/IJulia.jl.git IJulia
-        cd IJulia
-        julia -e 'using Pkg; Pkg.activate(); Pkg.instantiate(); Pkg.status(); using IJulia; installkernel("julia")'
+      shell: bash -l {0}
+      run: julia -e 'using Pkg; Pkg.add("IJulia"); using IJulia; installkernel("julia")'
 
     # # Run lesson notebooks
     # - name: Test notebook 00
