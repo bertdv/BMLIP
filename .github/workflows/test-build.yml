@@ -8,8 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        # platform: [windows-latest, ubuntu-latest, ubuntu-18.04, macos-latest]
-        platform: [windows-latest]
+        platform: [windows-latest, ubuntu-latest, ubuntu-18.04, macos-latest]
 
     runs-on: ${{ matrix.platform }}
 
@@ -47,7 +46,10 @@ jobs:
 
     # Add IJulia kernel to Jupyter
     - name: Install IJulia kernel
-      run: julia --project -e 'using Pkg; Pkg.add(PackageSpec(url="https://github.com/JuliaLang/IJulia.jl.git")); using IJulia; installkernel("julia")'
+      run: |
+        git clone https://github.com/JuliaLang/IJulia.jl.git IJulia
+        cd IJulia
+        julia -e 'using Pkg; Pkg.activate(); Pkg.instantiate(); Pkg.status(); using IJulia; installkernel("julia")'
 
     # # Run lesson notebooks
     # - name: Test notebook 00
