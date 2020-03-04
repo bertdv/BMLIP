@@ -32,10 +32,18 @@ jobs:
       shell: bash -l {0}
       run: |
         conda install -c anaconda jupyter
-        conda install -c conda-forge matplotlib
+        conda install -c conda-giforge matplotlib
         conda install -c anaconda graphviz
-        conda install -c anaconda python-graphviz
-        dot -V
+        conda install pip
+        pip install graphviz
+
+    # Install GraphViz
+    - name: Setup GraphViz
+      uses: kamiazya/setup-graphviz@v1
+
+    - name: test dot
+      shell: bash -l {0}
+      run: dot -V
 
     # Install Julia
     - name: Setup Julia environment
@@ -51,49 +59,49 @@ jobs:
       run: julia -e 'using Pkg; Pkg.add("IJulia"); using IJulia; installkernel("julia")'
 
     # Run lesson notebooks
-    - name: Test notebook 00
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb
-
-    - name: Test notebook 01
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/01-Machine-Learning-Overview.ipynb
-
-    - name: Test notebook 02
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/02-Probability-Theory-Review.ipynb
-
-    - name: Test notebook 03
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/03-Bayesian-Machine-Learning.ipynb
-
-    - name: Test notebook 04
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/04-The-Gaussian-Distribution.ipynb
-
-    - name: Test notebook 05
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/05-The-Multinomial-Distribution.ipynb
-
-    - name: Test notebook 06
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/06-Regression.ipynb
-
-    - name: Test notebook 07
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/07-Generative-Classification.ipynb
-
-    - name: Test notebook 08
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/08-Discriminative-Classification.ipynb
-
-    - name: Test notebook 09
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/09-Latent-Variable-Models-and-VB.ipynb
-
-    - name: Test notebook 10
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/10-Factor-Graphs.ipynb
+    # - name: Test notebook 00
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb
+    #
+    # - name: Test notebook 01
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/01-Machine-Learning-Overview.ipynb
+    #
+    # - name: Test notebook 02
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/02-Probability-Theory-Review.ipynb
+    #
+    # - name: Test notebook 03
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/03-Bayesian-Machine-Learning.ipynb
+    #
+    # - name: Test notebook 04
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/04-The-Gaussian-Distribution.ipynb
+    #
+    # - name: Test notebook 05
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/05-The-Multinomial-Distribution.ipynb
+    #
+    # - name: Test notebook 06
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/06-Regression.ipynb
+    #
+    # - name: Test notebook 07
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/07-Generative-Classification.ipynb
+    #
+    # - name: Test notebook 08
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/08-Discriminative-Classification.ipynb
+    #
+    # - name: Test notebook 09
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/09-Latent-Variable-Models-and-VB.ipynb
+    #
+    # - name: Test notebook 10
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/10-Factor-Graphs.ipynb
 
     - name: Test notebook 11
       shell: bash -l {0}
