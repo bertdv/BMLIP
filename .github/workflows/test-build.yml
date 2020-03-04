@@ -32,7 +32,7 @@ jobs:
       shell: bash -l {0}
       run: |
         conda install -c anaconda jupyter
-        conda install -c conda-giforge matplotlib
+        conda install -c conda-forge matplotlib
         conda install -c anaconda graphviz
         conda install pip
         pip install graphviz
