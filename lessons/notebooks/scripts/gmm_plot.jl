@@ -27,12 +27,6 @@ function plotGMM(X::Matrix, clusters::Vector, γ::Matrix)
         end
     end
 
-    # Plot data points
-    # if isnan(γ[1,1])
-    #     scatter(X[1,:], X[2,:], marker="o", s=20, c="k")
-    # else
-    #     scatter(X[1,:], X[2,:], marker="o", s=20, c=γ[1,:], cmap="PiYG")
-    # end
     if isnan(γ[1,1])
         scatter(X[1,:], X[2,:], marker="o", s=20)
     else
