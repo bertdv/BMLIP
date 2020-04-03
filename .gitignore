@@ -1,5 +1,6 @@
 ForneyLab.jl
 bundle/
+*.gif
 .ipynb_checkpoints
 Untitled.ipynb
 .DS_store
