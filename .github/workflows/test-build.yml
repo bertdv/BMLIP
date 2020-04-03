@@ -92,9 +92,9 @@ jobs:
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/08-Discriminative-Classification.ipynb
 
-    - name: Test notebook 09
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/09-Latent-Variable-Models-and-VB.ipynb
+    # - name: Test notebook 09
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/09-Latent-Variable-Models-and-VB.ipynb
 
     - name: Test notebook 10
       shell: bash -l {0}
@@ -107,3 +107,35 @@ jobs:
     - name: Test notebook 12
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/12-Intelligent-Agents-and-Active-Inference.ipynb
+
+    - name: Test notebook PP-1-variational
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1-variational_solutions.ipynb
+
+    - name: Test notebook PP-1-sampling
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1-sampling_solutions.ipynb
+
+    - name: Test notebook PP-2-variational
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-2-variational_solutions.ipynb
+
+    - name: Test notebook PP-2-sampling
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-2-sampling_solutions.ipynb
+
+    - name: Test notebook PP-3-variational
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-3-variational_solutions.ipynb
+
+    - name: Test notebook PP-3-sampling
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-3-sampling_solutions.ipynb
+
+    - name: Test notebook PP-4-variational
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-4-variational_solutions.ipynb
+
+    - name: Test notebook PP-4-sampling
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-4-sampling_solutions.ipynb
