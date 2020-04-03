@@ -112,9 +112,9 @@ jobs:
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1-variational_solutions.ipynb
 
-    - name: Test notebook PP-1-sampling
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1-sampling_solutions.ipynb
+    # - name: Test notebook PP-1-sampling
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1-sampling_solutions.ipynb
 
     - name: Test notebook PP-2-variational
       shell: bash -l {0}
