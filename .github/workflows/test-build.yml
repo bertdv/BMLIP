@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    timeout-minutes: 600
+    timeout-minutes: 300
 
     strategy:
       matrix:
