@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    timeout-minutes: 600
+    timeout-minutes: 300
 
     strategy:
       matrix:
@@ -39,14 +39,14 @@ jobs:
         conda install -c conda-forge matplotlib
         conda install -c anaconda graphviz
 
-    # Install Julia
-    - name: Setup Julia environment
-      uses: julia-actions/setup-julia@v1.1.0
+    # Install Julia 1.4
+    - name: Setup Julia
+      uses: julia-actions/setup-julia@v1
       with:
-        version: 1.3
+        version: "1.4.2"
         arch: x64
         show-versioninfo: true
-    - run: ln -s -f /Users/runner/hostedtoolcache/julia/1.3.1/x64/bin/julia /usr/local/bin/julia
+    - run: ln -s -f /Users/runner/hostedtoolcache/julia/1.4.2/x64/bin/julia /usr/local/bin/julia
       shell: bash -l {0}
       if: matrix.platform == 'macos-latest'
 
@@ -108,34 +108,18 @@ jobs:
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/12-Intelligent-Agents-and-Active-Inference.ipynb
 
-    - name: Test notebook PP-1-variational
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1-variational_solutions.ipynb
-
-    # - name: Test notebook PP-1-sampling
+    # - name: Test notebook PP-1
     #   shell: bash -l {0}
-    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1-sampling_solutions.ipynb
-
-    - name: Test notebook PP-2-variational
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-2-variational_solutions.ipynb
-
-    - name: Test notebook PP-2-sampling
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-2-sampling_solutions.ipynb
-
-    - name: Test notebook PP-3-variational
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-3-variational_solutions.ipynb
-
-    - name: Test notebook PP-3-sampling
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-3-sampling_solutions.ipynb
-
-    - name: Test notebook PP-4-variational
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-4-variational_solutions.ipynb
-
-    # - name: Test notebook PP-4-sampling
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-1_solutions.ipynb
+    #
+    # - name: Test notebook PP-2
     #   shell: bash -l {0}
-    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-4-sampling_solutions.ipynb
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-2_solutions.ipynb
+    #
+    # - name: Test notebook PP-3
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-3_solutions.ipynb
+    #
+    # - name: Test notebook PP-4
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-4_solutions.ipynb
