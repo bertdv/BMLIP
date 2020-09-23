@@ -58,55 +58,55 @@ jobs:
     # Run lesson notebooks
     - name: Test notebook 00
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/00-Course-Outline-and-Admin-Issues.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Course-Outline-and-Admin-Issues.ipynb
 
     - name: Test notebook 01
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/01-Machine-Learning-Overview.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Machine-Learning-Overview.ipynb
 
     - name: Test notebook 02
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/02-Probability-Theory-Review.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Probability-Theory-Review.ipynb
 
     - name: Test notebook 03
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/03-Bayesian-Machine-Learning.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Bayesian-Machine-Learning.ipynb
 
     - name: Test notebook 04
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/04-The-Gaussian-Distribution.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/The-Gaussian-Distribution.ipynb
 
     - name: Test notebook 05
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/05-The-Multinomial-Distribution.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/The-Multinomial-Distribution.ipynb
 
     - name: Test notebook 06
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/06-Regression.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Regression.ipynb
 
     - name: Test notebook 07
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/07-Generative-Classification.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Generative-Classification.ipynb
 
     - name: Test notebook 08
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/08-Discriminative-Classification.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Discriminative-Classification.ipynb
 
     # - name: Test notebook 09
     #   shell: bash -l {0}
-    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/09-Latent-Variable-Models-and-VB.ipynb
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Latent-Variable-Models-and-VB.ipynb
 
     - name: Test notebook 10
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/10-Factor-Graphs.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Factor-Graphs.ipynb
 
     - name: Test notebook 11
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/11-Dynamic-Models.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Dynamic-Models.ipynb
 
     - name: Test notebook 12
       shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/12-Intelligent-Agents-and-Active-Inference.ipynb
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Intelligent-Agents-and-Active-Inference.ipynb
 
     # - name: Test notebook PP-1
     #   shell: bash -l {0}
