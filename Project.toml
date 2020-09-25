@@ -1,2 +1,3 @@
 [deps]
+HCubature = "19dc6840-f33b-545b-b366-655c7e3ffd49"
 IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
