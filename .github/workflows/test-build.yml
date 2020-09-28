@@ -108,9 +108,9 @@ jobs:
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Intelligent-Agents-and-Active-Inference.ipynb
 
-    - name: Test notebook PP-1
-      shell: bash -l {0}
-      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-1.ipynb
+    # - name: Test notebook PP-1
+    #   shell: bash -l {0}
+    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-1.ipynb
     #
     # - name: Test notebook PP-2
     #   shell: bash -l {0}
