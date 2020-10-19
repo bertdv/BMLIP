@@ -43,10 +43,10 @@ jobs:
     - name: Setup Julia
       uses: julia-actions/setup-julia@v1
       with:
-        version: "1.4.2"
+        version: "1.5.2"
         arch: x64
         show-versioninfo: true
-    - run: ln -s -f /Users/runner/hostedtoolcache/julia/1.4.2/x64/bin/julia /usr/local/bin/julia
+    - run: ln -s -f /Users/runner/hostedtoolcache/julia/1.5.2/x64/bin/julia /usr/local/bin/julia
       shell: bash -l {0}
       if: matrix.platform == 'macos-latest'
 
@@ -92,9 +92,9 @@ jobs:
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Discriminative-Classification.ipynb
 
-    # - name: Test notebook 09
-    #   shell: bash -l {0}
-    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Latent-Variable-Models-and-VB.ipynb
+    - name: Test notebook 09
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Latent-Variable-Models-and-VB.ipynb
 
     - name: Test notebook 10
       shell: bash -l {0}
@@ -108,13 +108,13 @@ jobs:
       shell: bash -l {0}
       run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/Intelligent-Agents-and-Active-Inference.ipynb
 
-    # - name: Test notebook PP-1
-    #   shell: bash -l {0}
-    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-1.ipynb
-    #
-    # - name: Test notebook PP-2
-    #   shell: bash -l {0}
-    #   run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/exercises/probprog_solutions/Probabilistic-Programming-2_solutions.ipynb
+    - name: Test notebook PP-1
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-1.ipynb
+    
+    - name: Test notebook PP-2
+      shell: bash -l {0}
+      run: jupyter nbconvert --to notebook --inplace --execute --ExecutePreprocessor.timeout=-1 lessons/notebooks/probprog/Probabilistic-Programming-2.ipynb
     #
     # - name: Test notebook PP-3
     #   shell: bash -l {0}
