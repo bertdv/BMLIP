@@ -1,31 +1,22 @@
-This file contains instructions for generating a PDF of all course notebooks. Be aware that this is a __very__ rough set of scripts and contains multiple errors. Run at your own risk
-(If you're a student reading this because you consider generating your own PDF, don't. Let your instructors deal with this and pick up the latest copy from biaslab.github.io)
+Here is a step by step instruction on how to generate the bundler.
 
-Step 1:
-Install Docker
+Prerequisites:
+a. Make sure phantomjs is installed and added to path.
+b. Make sure you have a folder node_modules that for phantomjs to work.
 
-Step 2:
-Clean out the "probprog" course of all notebooks. They contain incomplete code for exercises which mean they crash nbconvert. Be careful to leave behind the workspace to allow the course notebooks access.
+Main steps:
+1. Open the terminal in the main location (where you have the bundler, exams, etc. folders).
+2. Type "jupyter nbconvert --config bundler/bundle_configuration.py"
+3. Select which bundle you want to make, type "1" for lecture notes, "2" for prob-prog, etc.
+4. Wait until everything has run, and you get the message "Completely done! Check the output folder."
+5. Go to the output folder, and there should be the rendered PDF.
 
-Step 3:
-Clean out the "misc" directory. Stuff in here crashes nbconvert for different reasons and is not part of the curriculum
-
-Step 4:
-Build the docker container. Stand in the top directory of the course (BMLIP) and run
-
-"docker build -f Dockerfile.pdf_generator -t bundler ."
-
-This command tells docker to create an image as specified in Dockerfile.pdf_generator. You might get errors at this point related to nodejs not being available. This is an issue on their end unfortunately. If this happens, rerun the command.
-
-Step 5:
-Run the container. Once the build completes, run the following command
-
-docker run --rm \                                                                                        
---volume ${PWD}/lessons:/bundler/lessons \                                                                                  
---volume ${PWD}/output:/bundler/output \                                                                                    
-bundler        
-
-This command runs the necessary scripts to generate the PDF file. It loops through all notebooks and runs them to generate output. Then all of them are converted to html using nbconvert. Finally the html files are stitched together with a Table of Contents, a frontpage and some additional formatting.
-
-Running this command will produce several errors, including the script crashing instead of completing. You may even end up with a hanging image that takes up space on your machine. Fear not, for if the task is failed succesfully, you should have a PDF in BMLIP/output
-
+Known issues:
+1. When bundling, make sure you do not have the PDF bundle at the save location open.
+   Else, the file cannot be overwritten as it is already open.
+2. Issues with requiring modules (e.g. require 'toc'). This is an issue with the node_modules.
+   Make sure that you have the correct modules installed at the correct location.
+3. Issues with phantomjs. Make sure you have phantomjs installed.
+   Furthermore, phantomjs should be added to the PATH variable.
+   When you type "phantomjs" in the terminal, the terminal should become dark grey.
+   If it says the command is not found, then there is a problem with installing it.
