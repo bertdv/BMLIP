@@ -2,11 +2,11 @@ var fs = require('fs');
 var system = require('system');
 var toc = require('toc');
 var webpage = require('webpage');
-var MathJax = require('mathjax');
 var page = webpage.create();
 
 var uri = system.args[1];
 
+console.log("Starting up PhantomJS...");
 var html = fs.read(uri, { mode: 'r', charset: 'utf-8' });
 var toc_options = {
   anchorMax: 3,
@@ -17,6 +17,7 @@ var toc_options = {
   tocMax: 3,
   tocMin: 1
 };
+console.log("Creating TOC...");
 fs.write('bundle/bundle_with_toc.html', toc.process(html, toc_options), {
   mode: 'w',
   charset: 'utf-8'
@@ -32,6 +33,7 @@ page.onError = function(msg, trace) {
   }
 };
 
+console.log("Setting paper size...");
 page.paperSize = {
   footer: {
     contents: phantom.callback(function(pageNum, numPages) {
@@ -43,16 +45,20 @@ page.paperSize = {
     }),
     height: '1.2cm',
   },
+  margin: {
+	  top: '1in',
+  },
   format: 'A4'
 };
 
+console.log("Start rendering to PDF...");
 capture(page, 'bundle/bundle_with_toc.html', function(error) {
   if(error) {
     console.error('Error', error);
     phantom.exit(1);
   } else {
-    page.render('output/BMLIP-5SSD0.pdf', { format: 'pdf' });
-    phantom.exit(0);
+	console.log("PDF created, waiting for math rendering...");
+	setTimeout(function(){ page.render('bundle/BMLIP-5SSD0.pdf', { format: 'pdf' }); console.log("Closing PhantomJS..."); phantom.exit(0);}, 10000);
   }
 });
 
@@ -90,6 +96,6 @@ function capture(page, pageUrl, callback) {
         clearInterval(interval);
         callback();
       }
-    }, 100);
+    }, 10);
   });
 };
