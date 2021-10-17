@@ -6,7 +6,6 @@ body {
   /* Positioning MUST be relative on any parents of the sections
    * for the page-break directives to have any effect! */
   position: relative !important;
-  zoom: 0.6;
 }
 
 body a[href]:after {
