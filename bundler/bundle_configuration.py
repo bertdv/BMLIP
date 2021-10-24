@@ -100,6 +100,7 @@ print(f"Converting {len(ipynb_files)} notebooks...")
 c.ExecutePreprocessor.timeout = 6000
 c.FilesWriter.build_directory = build_directory
 c.NbConvertApp.notebooks = ipynb_files_sort
+c.NbConvertApp.export_format = 'html'
 c.Preprocessor.enabled = True
 
 ### Combine and clean the notebooks
