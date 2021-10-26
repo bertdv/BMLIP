@@ -57,8 +57,8 @@ capture(page, 'bundle/bundle_with_toc.html', function(error) {
     console.error('Error', error);
     phantom.exit(1);
   } else {
-	console.log("PDF created, waiting for math rendering...");
-	setTimeout(function(){ page.render('bundle/BMLIP-5SSD0.pdf', { format: 'pdf' }); console.log("Closing PhantomJS..."); phantom.exit(0);}, 10000);
+	console.log("PDF created, waiting for math rendering (2 mins) ... ");
+	setTimeout(function(){ page.render('bundle/BMLIP-5SSD0.pdf', { format: 'pdf' }); console.log("Closing PhantomJS..."); phantom.exit(0);}, 120000);
   }
 });
 
