@@ -5,3 +5,9 @@ bundle/
 Untitled.ipynb
 .DS_store
 lessons/notebooks/probprog/archive
+
+
+
+### VisualStudioCode ###
+.vscode/*      # Maybe .vscode/**/* instead - see comments
+.vscode/**/*
