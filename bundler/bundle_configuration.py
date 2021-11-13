@@ -43,7 +43,7 @@ if bundle_directory == 1:
 	output_name = "lecture-notes"
 elif bundle_directory == 2:
 	location = 'lessons/notebooks/probprog'
-	order = [0, 1, 2, 3, 4]
+	order = [0, 1, 2, 3]
 	output_name = 'prob-prog'
 elif bundle_directory == 3:
 	location = 'lessons/exercises'
@@ -67,8 +67,11 @@ for (directory, _, files) in os.walk(location):
             filepath = Path(directory, filename)
             filepath_str = str(filepath)
             if ipynb_matcher.search(filepath_str):
+                if bundle_directory == 2:
+                    if "0" not in filepath_str:
+                        ipynb_files.append(filepath_str)
                 # If we want exercises, we only want files starting with Exercises-
-                if bundle_directory == 3:
+                elif bundle_directory == 3:
                     if ("Exercises-" in filepath_str and "Solutions" not in filepath_str) or "cheatsheet" in filepath_str:
                         ipynb_files.append(filepath_str)
 				# If we want solutions, we only want files starting with Solutions-
@@ -87,6 +90,7 @@ for (directory, _, files) in os.walk(location):
 
 ### sort them in the correct order
 ipynb_files_sort = ipynb_files.copy()
+
 if len(order) == len(ipynb_files):
     for i in range(len(order)):
         ipynb_files_sort[order[i]] = ipynb_files[i]
@@ -102,6 +106,7 @@ c.FilesWriter.build_directory = build_directory
 c.NbConvertApp.notebooks = ipynb_files_sort
 c.NbConvertApp.export_format = 'html'
 c.Preprocessor.enabled = True
+c.ExecutePreprocessor.kernel_name="julia-1.6"
 
 ### Combine and clean the notebooks
 def concat_and_clean():
@@ -312,4 +317,3 @@ def concat_and_clean():
     print("Completely done! Check the output folder.")
 
 atexit.register(concat_and_clean)
-
