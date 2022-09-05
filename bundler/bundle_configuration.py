@@ -106,7 +106,7 @@ c.FilesWriter.build_directory = build_directory
 c.NbConvertApp.notebooks = ipynb_files_sort
 c.NbConvertApp.export_format = 'html'
 c.Preprocessor.enabled = True
-c.ExecutePreprocessor.kernel_name="julia-1.6"
+c.ExecutePreprocessor.kernel_name="julia-1.7"
 
 ### Combine and clean the notebooks
 def concat_and_clean():
@@ -124,7 +124,7 @@ def concat_and_clean():
 
             os.remove(str(bundle_path))
 
-            cells = html_source.find_class('cell')
+            cells = html_source.find_class('jp-Cell')
 
             # If no main document body is available yet, grab it from the first
             # page that is found. Use that as the basis for the entire bundle
@@ -166,7 +166,7 @@ def concat_and_clean():
                 # have to be actually removed from the 'base' document to make
                 # sure they don't show up at the top of the notebook
 				# this is only applicable for the lecture notes
-                notebook_root = html_source.get_element_by_id('notebook-container')
+                notebook_root = html_source.find_class('jp-Notebook')[0]
                 if bundle_directory == 1:
                     notebook_root.remove(cells[-2])
                     notebook_root.remove(cells[-1])
