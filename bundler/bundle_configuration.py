@@ -106,7 +106,7 @@ c.FilesWriter.build_directory = build_directory
 c.NbConvertApp.notebooks = ipynb_files_sort
 c.NbConvertApp.export_format = 'html'
 c.Preprocessor.enabled = True
-c.ExecutePreprocessor.kernel_name="julia-1.7"
+c.ExecutePreprocessor.kernel_name="julia-1.8"
 
 ### Combine and clean the notebooks
 def concat_and_clean():
