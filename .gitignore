@@ -9,6 +9,7 @@ lessons/Manifest.toml
 lessons/notebooks/probprog/workspace/Manifest.toml
 
 
+
 ### VisualStudioCode ###
 .vscode/*      # Maybe .vscode/**/* instead - see comments
 .vscode/**/*

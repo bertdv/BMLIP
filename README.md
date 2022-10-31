@@ -7,10 +7,6 @@ Corr. to <bert.de.vries@tue.nl>
 
 This site contains materials for course [5SSD0 (Bayesian Machine Learning and Information Processing)](http://bmlip.nl) at [TU/e](http://tue.nl).
 
-
-### Teaching assistants
-[Ismail Senoz](https://biaslab.github.io/member/ismail/) and [Magnus Koudahl](https://biaslab.github.io/member/magnus/)
-
 ###  Lecture notes
 
 You can view the lecture notes at the [course website](http://bmlip.nl)
