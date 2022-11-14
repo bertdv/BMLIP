@@ -1,9 +1,10 @@
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+Cairo = "159f3aea-2a34-519c-b102-8c37f9878175"
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
-GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
 GraphPPL = "b3f8163a-e979-4e85-b43e-1f63d8c8b42c"
 HCubature = "19dc6840-f33b-545b-b366-655c7e3ffd49"
 JLD = "4138dd39-2aa7-5051-a626-17a0bb65d9c8"
