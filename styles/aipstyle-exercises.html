@@ -173,10 +173,13 @@ footer.hidden-print {
 <!-- this type adding was necessary to prevent error MathJax not defined -->
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-                        TeX: {
-                           extensions: ["AMSmath.js"],
-                           equationNumbers: { autoNumber: "AMS", useLabelIds: true}
-                           },
+                        CommonHTML: {
+                            scale: 200
+                        },
+                TeX: {
+                    extensions: ["AMSmath.js"],
+                    equationNumbers: { autoNumber: "AMS", useLabelIds: true}
+                },
                 tex2jax: {
                     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
                     displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
