@@ -180,10 +180,13 @@ footer.hidden-print {
 <!-- MathJax styling -->
 <script>
     MathJax.Hub.Config({
-                        TeX: {
-                           extensions: ["AMSmath.js"],
-                           equationNumbers: { autoNumber: "AMS", useLabelIds: true}
-                           },
+                        CommonHTML: {
+                            scale: 200
+                        },
+                TeX: {
+                    extensions: ["AMSmath.js"],
+                    equationNumbers: { autoNumber: "AMS", useLabelIds: true}
+                },
                 tex2jax: {
                     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
                     displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
