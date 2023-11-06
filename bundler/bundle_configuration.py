@@ -43,7 +43,7 @@ if bundle_directory == 1:
 	output_name = "lecture-notes"
 elif bundle_directory == 2:
 	location = 'lessons/notebooks/probprog'
-	order = [0, 1, 2, 3]
+	order = [0, 1, 2, 3, 4]
 	output_name = 'prob-prog'
 elif bundle_directory == 3:
 	location = 'lessons/exercises'
@@ -68,8 +68,9 @@ for (directory, _, files) in os.walk(location):
             filepath_str = str(filepath)
             if ipynb_matcher.search(filepath_str):
                 if bundle_directory == 2:
-                    if "0" not in filepath_str:
-                        ipynb_files.append(filepath_str)
+                    #if "0" not in filepath_str:
+                    #    ipynb_files.append(filepath_str)
+                    ipynb_files.append(filepath_str)
                 # If we want exercises, we only want files starting with Exercises-
                 elif bundle_directory == 3:
                     if ("Exercises-" in filepath_str and "Solutions" not in filepath_str) or "cheatsheet" in filepath_str:
@@ -168,7 +169,7 @@ def concat_and_clean():
 				# this is only applicable for the lecture notes
                 notebook_root = html_source.find_class('jp-Notebook')[0]
                 if bundle_directory == 1:
-                    notebook_root.remove(cells[-2])
+                    #notebook_root.remove(cells[-2])
                     notebook_root.remove(cells[-1])
                 elif bundle_directory == 3 or bundle_directory == 4:
                     notebook_root.remove(cells[-1])
@@ -180,7 +181,8 @@ def concat_and_clean():
             # contain the code loading custom CSS, these are not necessary for
             # the bundled version and should therefore be removed
             if bundle_directory == 1:
-                for cell in cells[0:-2]:
+                #for cell in cells[0:-2]:
+                for cell in cells[0:-1]:
                     chapter_node.append(cell)
 			# We want all cells of the prob programming
             elif bundle_directory == 2:
