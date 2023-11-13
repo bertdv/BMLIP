@@ -47,6 +47,8 @@ page.paperSize = {
   },
   margin: {
 	  top: '1in',
+    left: '0.3in',
+    right: '0.3in',
   },
   format: 'A4'
 };
