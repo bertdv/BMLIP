@@ -51,7 +51,7 @@ elif bundle_directory == 3:
 	output_name = 'exercises'
 elif bundle_directory == 4:
 	location = 'lessons/exercises'
-	order = [1, 6, 9, 2, 8, 7, 0, 5, 3, 4]
+	order = [1, 6, 8, 2, 9, 7, 0, 5, 3, 4]
 	output_name = 'solutions'
 	
 
