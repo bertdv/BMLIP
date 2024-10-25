@@ -1,10 +1,12 @@
 [deps]
+BayesBase = "b4ee3484-f114-42fe-b91c-797d54a0c67e"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 Cairo = "159f3aea-2a34-519c-b102-8c37f9878175"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+ExponentialFamily = "62312e5e-252a-4322-ace9-a5f4bf9b357b"
 HCubature = "19dc6840-f33b-545b-b366-655c7e3ffd49"
 HypergeometricFunctions = "34004b35-14d8-5ef3-9330-4cdb6864b03a"
 IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
@@ -24,6 +26,3 @@ SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 StatsFuns = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
 StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
-
-[compat]
-RxInfer = "~2.13"
