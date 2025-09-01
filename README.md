@@ -1,3 +1,20 @@
+> [!IMPORTANT]
+> # New course
+> This course has been updated for the 2025-2026 academic year.
+>
+> [Go to bmlip/course →](https://github.com/bmlip/course#readme)
+
+
+
+_This repository is an archive of the 2024-2025 academic year._
+
+
+---
+
+---
+
+---
+
 ## Bayesian Machine Learning and Information Processing
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bertdv/BMLIP/master)
 
